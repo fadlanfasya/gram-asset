@@ -80,6 +80,18 @@
     border: 2px solid var(--bg-primary);
 }
 
+.topbar__theme-toggle {
+    color: var(--text-muted);
+    transition: color var(--transition-normal);
+    padding: var(--space-1);
+    border-radius: var(--radius-md);
+}
+
+.topbar__theme-toggle:hover {
+    color: var(--color-primary);
+    background: var(--bg-hover);
+}
+
 .topbar__divider {
     width: 1px;
     height: 2rem;

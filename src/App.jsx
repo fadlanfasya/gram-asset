@@ -14,6 +14,7 @@ import useAuthStore from './stores/useAuthStore'
 import useDefinitionStore from './stores/useDefinitionStore'
 import useAssetStore from './stores/useAssetStore'
 import useRelationshipStore from './stores/useRelationshipStore'
+import useThemeStore from './stores/useThemeStore'
 
 // Protected Route Wrapper
 function RequireAuth({ children }) {
@@ -40,6 +41,12 @@ function RequireAuth({ children }) {
 }
 
 export default function App() {
+    const theme = useThemeStore((s) => s.theme)
+
+    useEffect(() => {
+        document.documentElement.className = theme === 'light' ? 'light-theme' : ''
+    }, [theme])
+
     return (
         <Routes>
             <Route path="/login" element={<LoginPage />} />

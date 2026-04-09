@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0b0e14;
+    background-color: var(--bg-primary);
     position: relative;
     overflow: hidden;
 }
@@ -90,6 +90,25 @@
 .login-header {
     text-align: center;
     margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.login-theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.login-theme-toggle:hover {
+    color: var(--color-primary);
+    background: var(--bg-hover);
 }
 
 .login-logo {
@@ -113,7 +132,7 @@
 .login-title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 

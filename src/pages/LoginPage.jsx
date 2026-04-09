@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import useAuthStore from '../stores/useAuthStore'
+import useThemeStore from '../stores/useThemeStore'
 import './LoginPage.css'
 
 export default function LoginPage() {
     const navigate = useNavigate()
     const location = useLocation()
     const login = useAuthStore((s) => s.login)
+    const { theme, toggleTheme } = useThemeStore()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -43,6 +45,15 @@ export default function LoginPage() {
 
             <div className="login-card glass-effect">
                 <div className="login-header">
+                    <button
+                        className="login-theme-toggle"
+                        onClick={toggleTheme}
+                        title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+                    >
+                        <span className="material-icons">
+                            {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+                        </span>
+                    </button>
                     <div className="login-logo">
                         <span className="material-icons">hub</span>
                     </div>
