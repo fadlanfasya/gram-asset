@@ -1,0 +1,242 @@
+/* ═══ Asset Manager Page ═══ */
+
+/* ── Header ── */
+.asset-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-6);
+}
+
+.asset-page__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.asset-page__subtitle {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.asset-page__create-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background var(--transition-normal);
+    box-shadow: var(--shadow-primary);
+}
+
+.asset-page__create-btn:hover {
+    background: var(--color-primary-hover);
+}
+
+/* ── Toolbar ── */
+.asset-page__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+    border: 1px solid var(--border-color);
+}
+
+.asset-page__search {
+    flex: 1;
+    min-width: 240px;
+    position: relative;
+}
+
+.asset-page__search .material-icons {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 20px;
+}
+
+.asset-page__search input {
+    width: 100%;
+    background: var(--bg-input);
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+}
+
+.asset-page__search input:focus {
+    box-shadow: 0 0 0 2px var(--color-primary-20);
+}
+
+.asset-page__filters {
+    display: flex;
+    gap: var(--space-3);
+}
+
+/* Custom Select */
+.asset-page__select-wrapper {
+    position: relative;
+    background: var(--bg-input);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+}
+
+.asset-page__select-icon {
+    position: absolute;
+    left: 10px;
+    color: var(--text-muted);
+    font-size: 18px;
+    pointer-events: none;
+}
+
+.asset-page__select-wrapper select {
+    padding: 0.6rem 2rem 0.6rem 2.2rem;
+    appearance: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    min-width: 140px;
+}
+
+.asset-page__select-wrapper select option {
+    background: var(--bg-card);
+}
+
+/* ── Table ── */
+.asset-page__table-container {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.asset-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.asset-table th {
+    background: var(--bg-table-header);
+    padding: var(--space-4) var(--space-6);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.asset-table td {
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.asset-table__row {
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.asset-table__row:hover {
+    background: var(--bg-hover);
+}
+
+.asset-table__row:last-child td {
+    border-bottom: none;
+}
+
+/* Name Cell */
+.asset-table__name-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.asset-table__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asset-table__name-text {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Tags */
+.asset-table__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.asset-tag {
+    font-size: 0.7rem;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--text-secondary);
+}
+
+.asset-tag--more {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-subtle);
+}
+
+/* Actions */
+.asset-table__action-btn {
+    padding: 6px;
+    color: var(--text-muted);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.asset-table__action-btn:hover {
+    background: var(--bg-input);
+    color: var(--color-primary);
+}
+
+/* Empty State */
+.asset-table__empty {
+    padding: 4rem;
+    text-align: center;
+}
+
+.asset-table__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-muted);
+}
+
+.asset-table__empty-state .material-icons {
+    font-size: 48px;
+    opacity: 0.5;
+}
+
+/* Footer */
+.asset-page__footer {
+    padding: var(--space-4) var(--space-6);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.asset-page__footer strong {
+    color: var(--text-primary);
+}

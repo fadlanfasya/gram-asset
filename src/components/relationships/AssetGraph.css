@@ -1,0 +1,43 @@
+.asset-graph-container {
+    width: 100%;
+    height: 500px;
+    /* Default height */
+    background-color: #0b0e14;
+    background-image: radial-gradient(#2a2d3d 1px, transparent 1px);
+    background-size: 20px 20px;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.graph-overlay-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+}
+
+.btn-add-rel-small {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-add-rel-small:hover {
+    background: var(--bg-hover);
+    border-color: var(--color-primary);
+}
+
+.btn-add-rel-small .material-icons {
+    font-size: 16px;
+}

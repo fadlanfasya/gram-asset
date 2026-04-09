@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GRAM Dashboard Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#3c83f6",
+                "background-light": "#f5f7f8",
+                "background-dark": "#101722",
+                "card-dark": "#1a1d27",
+                "accent-cyan": "#06b6d4",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 29, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3c83f6, #06b6d4);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-white/10 glass-effect hidden md:flex flex-col sticky top-0 h-screen z-50">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-accent-cyan rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/20">G</div>
+<span class="text-xl font-bold tracking-tight text-slate-800 dark:text-white uppercase">Gram</span>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg bg-primary/10 text-primary border-l-4 border-primary" href="#">
+<span class="material-icons text-xl">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">account_tree</span>
+                    Definitions
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">inventory_2</span>
+                    Assets
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">hub</span>
+                    Relationships
+                </a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-white/10">
+<div class="bg-primary/5 rounded-xl p-4">
+<p class="text-xs font-semibold text-primary uppercase mb-2">System Status</p>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-green-500"></span>
+<span class="text-xs text-slate-500 dark:text-slate-400">All services operational</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-slate-200 dark:border-white/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-40">
+<div class="flex-1 max-w-xl">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+<span class="material-icons text-xl">search</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border-none rounded-lg bg-slate-100 dark:bg-white/5 text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-white" placeholder="Search infrastructure..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6 ml-4">
+<button class="relative text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">notifications</span>
+<span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full border-2 border-background-light dark:border-background-dark"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-white/10"></div>
+<div class="flex items-center gap-3 cursor-pointer">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold text-slate-900 dark:text-white">Admin User</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">System Architect</p>
+</div>
+<img alt="Admin profile" class="w-10 h-10 rounded-full border border-primary/20" data-alt="Professional portrait of a male system administrator" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl_s06hABmmoyHldRMQisD06nOeIH2afNi2YzFaL2iGsewdinsHuZmmPD-ZRuWHrFgcdVqsQa_6r6jxuK8S57e-099Naxacb_gk6uWWVWHWXI8fgQ7wsnCiqTVX-7yeBu0CsUSgDkD_NpGpLEAHFS-0s3-7r0th-L5ZTxFITHch3I1LM9MvI_rGVNYPrjetixeJYUWQH4vwncyvLI07tQyRQCl8zEs1H4uZOfrC9-8FhpfC2hbpHNTVZ4eVQPUe_YxjVkegweF2Ljf"/>
+</div>
+</div>
+</header>
+<div class="p-8">
+<!-- Welcome Section -->
+<div class="mb-8">
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white">Infrastructure Overview</h1>
+<p class="text-slate-500 dark:text-slate-400">Manage and monitor complex IT asset dependencies.</p>
+</div>
+<!-- StatCards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="glass-effect p-6 rounded-xl hover:translate-y-[-4px] transition-transform cursor-pointer">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-icons">inventory_2</span>
+</div>
+<span class="text-xs font-bold text-green-500 flex items-center">+4.5% <span class="material-icons text-xs">trending_up</span></span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Total Assets</p>
+<p class="text-3xl font-bold text-slate-900 dark:text-white">47</p>
+</div>
+<div class="glass-effect p-6 rounded-xl hover:translate-y-[-4px] transition-transform cursor-pointer">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-accent-cyan/10 rounded-lg text-accent-cyan">
+<span class="material-icons">category</span>
+</div>
+<span class="text-xs font-bold text-slate-400">Static</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Asset Types</p>
+<p class="text-3xl font-bold text-slate-900 dark:text-white">8</p>
+</div>
+<div class="glass-effect p-6 rounded-xl hover:translate-y-[-4px] transition-transform cursor-pointer">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-purple-500/10 rounded-lg text-purple-500">
+<span class="material-icons">share</span>
+</div>
+<span class="text-xs font-bold text-primary flex items-center">+12 new</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Dependencies</p>
+<p class="text-3xl font-bold text-slate-900 dark:text-white">23</p>
+</div>
+<div class="glass-effect p-6 rounded-xl border-l-4 border-amber-500 hover:translate-y-[-4px] transition-transform cursor-pointer">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-amber-500/10 rounded-lg text-amber-500">
+<span class="material-icons">build</span>
+</div>
+<span class="text-xs font-bold text-amber-500 flex items-center">Action Req.</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Maintenance</p>
+<p class="text-3xl font-bold text-slate-900 dark:text-white">5</p>
+</div>
+</div>
+<!-- Main Content Row -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
+<!-- Recent Assets Table -->
+<div class="xl:col-span-2 glass-effect rounded-xl overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
+<h2 class="font-bold text-lg text-slate-900 dark:text-white">Recent Assets</h2>
+<button class="text-sm text-primary font-medium hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-white/5 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">
+<tr>
+<th class="px-6 py-4 font-semibold">Name</th>
+<th class="px-6 py-4 font-semibold">Type</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold">Date Added</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-white/10">
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons text-sm">cloud</span>
+</div>
+<span class="font-medium text-slate-900 dark:text-white group-hover:text-primary">AWS-Prod-Node-01</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Cloud Infrastructure</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-500">Active</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Oct 24, 2023</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-accent-cyan/10 flex items-center justify-center text-accent-cyan">
+<span class="material-icons text-sm">dns</span>
+</div>
+<span class="font-medium text-slate-900 dark:text-white group-hover:text-primary">Core-Switch-L3</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Hardware</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-500/10 text-amber-500">Maintenance</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Oct 22, 2023</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-purple-500/10 flex items-center justify-center text-purple-500">
+<span class="material-icons text-sm">terminal</span>
+</div>
+<span class="font-medium text-slate-900 dark:text-white group-hover:text-primary">K8s-Cluster-Main</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Software Service</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-500">Active</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Oct 20, 2023</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-slate-500/10 flex items-center justify-center text-slate-500">
+<span class="material-icons text-sm">storage</span>
+</div>
+<span class="font-medium text-slate-900 dark:text-white group-hover:text-primary">Legacy-Archive-02</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Storage</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-500/20 text-slate-500">Retired</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">Oct 15, 2023</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Side Stats/Info -->
+<div class="space-y-6">
+<div class="glass-effect rounded-xl p-6">
+<h3 class="font-bold text-slate-900 dark:text-white mb-4">Quick Actions</h3>
+<div class="flex flex-col gap-3">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-all shadow-lg shadow-primary/20">
+<span class="material-icons">add_circle</span>
+                                    New Asset
+                                </button>
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-900 dark:text-white rounded-lg font-semibold transition-all">
+<span class="material-icons">description</span>
+                                    New Definition
+                                </button>
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-900 dark:text-white rounded-lg font-semibold transition-all">
+<span class="material-icons">link</span>
+                                    New Relation
+                                </button>
+</div>
+</div>
+<div class="glass-effect rounded-xl p-6">
+<h3 class="font-bold text-slate-900 dark:text-white mb-4">Infrastructure Health</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-500 dark:text-slate-400">Node Availability</span>
+<span class="text-primary font-bold">94%</span>
+</div>
+<div class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-500 dark:text-slate-400">Dependency Mapping</span>
+<span class="text-accent-cyan font-bold">78%</span>
+</div>
+<div class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-accent-cyan" style="width: 78%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-500 dark:text-slate-400">Maintenance Score</span>
+<span class="text-amber-500 font-bold">62%</span>
+</div>
+<div class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500" style="width: 62%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dependency Visualization Placeholder -->
+<div class="glass-effect rounded-xl p-8 text-center border-dashed border-2 border-white/5">
+<div class="max-w-md mx-auto">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+<span class="material-icons text-3xl">hub</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Network Topology</h3>
+<p class="text-slate-500 dark:text-slate-400 mb-6">Interactive map of all current assets and their complex dependencies across regions.</p>
+<div class="relative w-full aspect-video rounded-lg overflow-hidden border border-white/10 bg-slate-900">
+<img alt="Infrastructure map" class="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer" data-alt="Digital network graph visualization with nodes and connections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD639gPVtpTG52HPRjEhwqyEnOoKjGZM7utTEVrA43j_eYD8CNOJo07Z0EZBcbPS7E5Iym8aoKxqBRRA8PhyRSqerXtWsm1kUpvpGceHKBuyHkfiDO8_UTXVGDJo57g1S0P-e56xtwSEqymrlRwS-LQqfJgltiO5GJaS6pXqgmTV0yQ_MSQGoaml5jnDvE8ZziqjG16Qgn-pFG0p6m4JNoQtDf8BocrGIhcmJsjqPA58ZUNdJw-10OoE3Xjg23wWRByTuiidfGYITf"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<button class="bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 text-white font-medium hover:bg-white/20 transition-all">
+                                    Launch Explorer
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto p-8 border-t border-slate-200 dark:border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 dark:text-slate-400 text-sm">
+<p>© 2023 GRAM Asset Management v2.4.0</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">API Keys</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

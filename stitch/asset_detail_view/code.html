@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Asset Detail View - GRAM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101722",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Navigation / Breadcrumbs -->
+<nav class="border-b border-primary/10 bg-white/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-4">
+<span class="text-primary text-xl font-bold tracking-tighter">GRAM</span>
+<div class="h-4 w-px bg-slate-700 mx-2"></div>
+<div class="flex items-center text-sm font-medium text-slate-500 dark:text-slate-400 gap-2">
+<span class="hover:text-primary cursor-pointer transition-colors">Assets</span>
+<span class="material-icons text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-200">PROD-WEB-01</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary text-xs font-bold">
+                        JD
+                    </div>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<h1 class="text-3xl font-bold tracking-tight">PROD-WEB-01</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-semibold border border-emerald-500/20 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Active
+                    </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 flex items-center gap-2">
+<span class="material-icons text-sm">dns</span>
+                    Virtual Machine • Production Cluster Alpha
+                </p>
+</div>
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all font-medium text-sm">
+<span class="material-icons text-sm">content_copy</span>
+                    Duplicate
+                </button>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-red-500/10 hover:text-red-500 border border-transparent hover:border-red-500/20 transition-all font-medium text-sm">
+<span class="material-icons text-sm">delete_outline</span>
+                    Delete
+                </button>
+<button class="inline-flex items-center gap-2 px-6 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white transition-all font-semibold text-sm shadow-lg shadow-primary/20">
+<span class="material-icons text-sm">edit</span>
+                    Edit Asset
+                </button>
+</div>
+</header>
+<!-- Tab Navigation -->
+<div class="border-b border-slate-200 dark:border-slate-800 mb-8">
+<nav class="flex gap-8">
+<button class="pb-4 px-1 border-b-2 border-primary text-primary font-semibold text-sm flex items-center gap-2">
+<span class="material-icons text-sm">dashboard</span>
+                    Overview
+                </button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-300 transition-colors font-medium text-sm flex items-center gap-2">
+<span class="material-icons text-sm">hub</span>
+                    Dependencies
+                </button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-300 transition-colors font-medium text-sm flex items-center gap-2">
+<span class="material-icons text-sm">history</span>
+                    History
+                </button>
+</nav>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Specs -->
+<div class="lg:col-span-2 space-y-8">
+<!-- VM Specifications Panel -->
+<section class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 flex items-center justify-between">
+<h2 class="font-bold flex items-center gap-2">
+<span class="material-icons text-primary text-sm">settings_input_component</span>
+                            VM Specifications
+                        </h2>
+<span class="text-xs text-slate-500">Last scanned: 12m ago</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">IP Address</span>
+<span class="font-mono text-primary font-medium">192.168.1.45</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">vCPU</span>
+<span class="font-semibold text-lg">8 Core <span class="text-xs text-slate-500 font-normal">(Intel Xeon Platinum)</span></span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">RAM</span>
+<span class="font-semibold text-lg">16GB <span class="text-xs text-slate-500 font-normal">DDR4 ECC</span></span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">Operating System</span>
+<div class="flex items-center gap-2">
+<span class="font-semibold">Ubuntu 22.04 LTS</span>
+<span class="material-icons text-xs text-slate-500">verified</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">Storage</span>
+<div class="w-full h-2 bg-slate-800 rounded-full mt-1 overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 65%;"></div>
+</div>
+<span class="font-semibold text-sm">325GB / 500GB SSD</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-wider">Network Interface</span>
+<span class="text-sm font-medium">eth0 (vSwitch-Prod-01)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Visualization Mockup -->
+<div class="rounded-xl overflow-hidden relative group aspect-video lg:aspect-auto lg:h-48 border border-slate-200 dark:border-slate-800">
+<img alt="Server room hardware" class="w-full h-full object-cover opacity-50 dark:opacity-30 grayscale hover:grayscale-0 transition-all duration-700" data-alt="Cyber security data center server rows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYL6-9Pe_vNh5eE-t8vCDB61iw_fcmsSxCOneAkjXx7Ar4XI-e63EKTcQXSsymgO0PXdFIhFdK6y7CvsIl8xFgBITyGJQAiU9L3rFfpacMZ944C_T3p7Rm0jpJpFSQD3J8IdlmLaFaRCX1N-twcfyclE7IUALBicfjvldj0dHlZcpUzq2OEYwh1O9clxGtiU9u2k2-lsWxsJiPHXh7UXBwzHQVYm5ypIFtQrRJlQbnlao7iLkBCJ8o3WOEHcsVF8ZVWS4nr3sxYW9C"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/20 backdrop-blur-md rounded-lg">
+<span class="material-icons text-primary">visibility</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-white/80">Real-time Visualization</span>
+</div>
+<button class="text-xs font-bold text-primary hover:underline uppercase tracking-widest">View Map</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Info Panel -->
+<div class="space-y-8">
+<section class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+<h2 class="font-bold flex items-center gap-2 mb-6 text-sm uppercase tracking-widest text-slate-400">
+<span class="material-icons text-primary text-sm">info</span>
+                        Asset Metadata
+                    </h2>
+<div class="space-y-6">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<p class="text-xs font-medium text-slate-500 uppercase tracking-tighter">Created Date</p>
+<p class="text-sm font-medium">Oct 12, 2023</p>
+</div>
+<div class="text-right space-y-1">
+<p class="text-xs font-medium text-slate-500 uppercase tracking-tighter">Created By</p>
+<p class="text-sm font-medium">System Automator</p>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<p class="text-xs font-medium text-slate-500 uppercase tracking-tighter">Last Updated</p>
+<p class="text-sm font-medium">2 hours ago</p>
+</div>
+<div class="text-right space-y-1">
+<p class="text-xs font-medium text-slate-500 uppercase tracking-tighter">Owner</p>
+<p class="text-sm font-medium text-primary">WebOps Team</p>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-tighter">Tags</span>
+<button class="text-[10px] text-primary hover:underline font-bold uppercase tracking-widest">+ Add Tag</button>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 rounded bg-slate-800 text-[10px] font-bold text-slate-400 border border-slate-700">AWS-EAST-1</span>
+<span class="px-2 py-1 rounded bg-slate-800 text-[10px] font-bold text-slate-400 border border-slate-700">FRONTEND</span>
+<span class="px-2 py-1 rounded bg-slate-800 text-[10px] font-bold text-slate-400 border border-slate-700">NGINX</span>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-primary/5 border border-primary/20 rounded-xl p-6">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-icons text-primary">security</span>
+<h3 class="font-bold text-sm">Compliance Check</h3>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed mb-4">
+                        This asset is currently meeting 100% of the internal security compliance requirements. No vulnerabilities found in last scan.
+                    </p>
+<button class="w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold rounded-lg transition-colors border border-primary/30">
+                        View Compliance Report
+                    </button>
+</section>
+</div>
+</div>
+<!-- Related Assets Footer -->
+<section class="mt-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold">Related Assets</h2>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-lg border border-slate-800 flex items-center justify-center text-slate-500 hover:text-white transition-colors">
+<span class="material-icons text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg border border-slate-800 flex items-center justify-center text-slate-500 hover:text-white transition-colors">
+<span class="material-icons text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Related Asset Card 1 -->
+<div class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-primary/50 transition-all group cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-500 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+<span class="material-icons">router</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-sm truncate uppercase tracking-tight">SW-CORE-01</h3>
+<p class="text-xs text-slate-500">Core Network Switch</p>
+</div>
+<span class="text-xs font-bold text-emerald-500">ONLINE</span>
+</div>
+</div>
+<!-- Related Asset Card 2 -->
+<div class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-primary/50 transition-all group cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+<span class="material-icons">storage</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-sm truncate uppercase tracking-tight">DB-CLUSTER-MAIN</h3>
+<p class="text-xs text-slate-500">PostgreSQL Cluster</p>
+</div>
+<span class="text-xs font-bold text-emerald-500">ONLINE</span>
+</div>
+</div>
+<!-- Related Asset Card 3 -->
+<div class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-primary/50 transition-all group cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition-colors">
+<span class="material-icons">cloud_queue</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-sm truncate uppercase tracking-tight">S3-ASSET-STORE</h3>
+<p class="text-xs text-slate-500">Object Storage</p>
+</div>
+<span class="text-xs font-bold text-emerald-500">ONLINE</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Map View Utility -->
+<div class="hidden">
+<div data-location="San Francisco" style=""></div>
+</div>
+</body></html>

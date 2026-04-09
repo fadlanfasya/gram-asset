@@ -1,0 +1,317 @@
+/* ═══ Relationships Page ═══ */
+
+.relationships-page {
+    display: flex;
+    height: calc(100vh - 64px);
+    /* Full height minus topbar */
+    background: var(--bg-primary);
+    overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.rel-sidebar {
+    width: 320px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.rel-header {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.rel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.rel-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.rel-search {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.rel-search-input-wrapper {
+    position: relative;
+}
+
+.rel-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 18px;
+}
+
+.rel-search-input {
+    width: 100%;
+    padding: 0.5rem 0.5rem 0.5rem 2.2rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+.rel-search-input:focus {
+    border-color: var(--color-primary);
+}
+
+/* Relationship List */
+.rel-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-4);
+}
+
+.rel-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.rel-count-badge {
+    background: var(--color-primary-10);
+    color: var(--color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+.rel-item {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+    transition: all var(--transition-normal);
+}
+
+.rel-item:hover {
+    border-color: var(--color-primary-50);
+    background: var(--bg-hover);
+}
+
+.rel-type {
+    font-size: 0.75rem;
+    color: var(--color-accent-cyan);
+    margin-bottom: var(--space-2);
+    display: block;
+}
+
+.rel-node-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.rel-arrow {
+    display: flex;
+    justify-content: center;
+    padding: 2px 0;
+    color: var(--text-muted);
+}
+
+.rel-arrow-icon {
+    font-size: 14px;
+}
+
+/* ── Graph Area ── */
+.rel-graph-area {
+    flex: 1;
+    position: relative;
+    background-color: #0b0e14;
+    background-image: radial-gradient(#2a2d3d 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.rel-top-bar {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    z-index: 5;
+}
+
+.status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: var(--radius-full);
+    color: var(--color-green);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.add-rel-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-primary);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-primary);
+    transition: background var(--transition-normal);
+}
+
+.add-rel-btn:hover {
+    background: var(--color-primary-hover);
+}
+
+/* Custom Node Styles */
+.asset-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: var(--radius-lg);
+    transition: transform 0.2s;
+}
+
+.asset-node__box {
+    width: 50px;
+    height: 50px;
+    background: var(--bg-card);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.asset-node__status {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-card);
+}
+
+.asset-node__label {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.asset-node--selected .asset-node__box {
+    border-color: #fff;
+    box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.asset-node--selected .asset-node__label {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Legend */
+.rel-legend {
+    position: absolute;
+    bottom: var(--space-4);
+    left: var(--space-4);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    width: 200px;
+    z-index: 5;
+}
+
+.legend-title {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    letter-spacing: 0.05em;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-size: 0.8125rem;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* Controls Override */
+.react-flow__controls {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+}
+
+.react-flow__controls-button {
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-card);
+    fill: var(--text-primary);
+}
+
+.react-flow__controls-button:last-child {
+    border-bottom: none;
+}
+
+.react-flow__controls-button:hover {
+    background: var(--bg-hover);
+}
+
+/* Minimap Override */
+.react-flow__minimap {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}

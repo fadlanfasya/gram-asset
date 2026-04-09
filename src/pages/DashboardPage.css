@@ -1,0 +1,294 @@
+/* ═══ Dashboard Page ═══ */
+
+.dashboard__welcome {
+    margin-bottom: var(--space-8);
+}
+
+.dashboard__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.dashboard__subtitle {
+    color: var(--text-muted);
+}
+
+/* ── Stat Grid ── */
+.dashboard__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+}
+
+@media (max-width: 1024px) {
+    .dashboard__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .dashboard__stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Main Row ── */
+.dashboard__main-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+}
+
+@media (max-width: 1280px) {
+    .dashboard__main-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Recent Assets ── */
+.dashboard__recent {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.dashboard__recent-header {
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard__section-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.dashboard__view-all {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    transition: opacity var(--transition-normal);
+}
+
+.dashboard__view-all:hover {
+    text-decoration: underline;
+}
+
+.dashboard__table-wrapper {
+    overflow-x: auto;
+}
+
+.dashboard__table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.dashboard__table thead {
+    background: var(--bg-table-header);
+}
+
+.dashboard__table th {
+    padding: var(--space-4) var(--space-6);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.dashboard__table tbody tr {
+    border-top: 1px solid var(--border-color);
+}
+
+.dashboard__table-row {
+    cursor: pointer;
+    transition: background var(--transition-normal);
+}
+
+.dashboard__table-row:hover {
+    background: var(--bg-hover);
+}
+
+.dashboard__table td {
+    padding: var(--space-4) var(--space-6);
+}
+
+.dashboard__asset-name {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.dashboard__asset-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dashboard__asset-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: color var(--transition-normal);
+}
+
+.dashboard__table-row:hover .dashboard__asset-label {
+    color: var(--color-primary);
+}
+
+.dashboard__cell-muted {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* ── Side Panel ── */
+.dashboard__side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.dashboard__quick-actions,
+.dashboard__health {
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+}
+
+.dashboard__side-title {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+}
+
+/* ── Action Buttons ── */
+.dashboard__action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.dashboard__btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+}
+
+.dashboard__btn--primary {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: var(--shadow-primary);
+}
+
+.dashboard__btn--primary:hover {
+    background: var(--color-primary-hover);
+}
+
+.dashboard__btn--outline {
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.dashboard__btn--outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Health Metrics ── */
+.dashboard__health-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.dashboard__health-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.dashboard__health-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard__health-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.dashboard__health-value {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* ── Network Topology ── */
+.dashboard__topology {
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    border: 2px dashed var(--border-subtle);
+}
+
+.dashboard__topology-content {
+    max-width: 28rem;
+    margin: 0 auto;
+}
+
+.dashboard__topology-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--color-primary-10);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-4);
+    color: var(--color-primary);
+}
+
+.dashboard__topology-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.dashboard__topology-desc {
+    color: var(--text-muted);
+    margin-bottom: var(--space-6);
+}
+
+.dashboard__topology-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-6);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: all var(--transition-normal);
+}
+
+.dashboard__topology-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

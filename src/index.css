@@ -1,0 +1,228 @@
+/* ═══════════════════════════════════════════════════════════
+   GRAM — Design System
+   IT Asset Management — Dark Theme
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── CSS Custom Properties ── */
+:root {
+  /* Colors */
+  --color-primary: #3c83f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-10: rgba(60, 131, 246, 0.1);
+  --color-primary-20: rgba(60, 131, 246, 0.2);
+  --color-primary-50: rgba(60, 131, 246, 0.5);
+
+  --color-accent-cyan: #06b6d4;
+  --color-accent-cyan-10: rgba(6, 182, 212, 0.1);
+
+  --color-purple: #8b5cf6;
+  --color-purple-10: rgba(139, 92, 246, 0.1);
+
+  --color-green: #22c55e;
+  --color-green-10: rgba(34, 197, 94, 0.1);
+
+  --color-amber: #f59e0b;
+  --color-amber-10: rgba(245, 158, 11, 0.1);
+
+  --color-red: #ef4444;
+  --color-red-10: rgba(239, 68, 68, 0.1);
+
+  /* Background */
+  --bg-primary: #101722;
+  --bg-card: #1a1d27;
+  --bg-card-70: rgba(26, 29, 39, 0.7);
+  --bg-hover: rgba(255, 255, 255, 0.05);
+  --bg-input: rgba(255, 255, 255, 0.05);
+  --bg-header: rgba(16, 23, 34, 0.8);
+  --bg-table-header: rgba(255, 255, 255, 0.03);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Borders */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-primary: 0 4px 14px rgba(60, 131, 246, 0.2);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* Layout */
+  --sidebar-width: 16rem;
+  --header-height: 4rem;
+}
+
+/* ── Base ── */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  color: inherit;
+  background: transparent;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── Utility Classes ── */
+.glass-effect {
+  backdrop-filter: blur(12px);
+  background: var(--bg-card-70);
+  border: 1px solid var(--border-subtle);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent-cyan));
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+/* ── Status Badge ── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.status-badge--active {
+  background: var(--color-green-10);
+  color: var(--color-green);
+}
+
+.status-badge--maintenance {
+  background: var(--color-amber-10);
+  color: var(--color-amber);
+}
+
+.status-badge--decommissioned {
+  background: var(--color-red-10);
+  color: var(--color-red);
+}
+
+.status-badge--retired {
+  background: rgba(100, 116, 139, 0.2);
+  color: var(--text-dim);
+}
+
+/* ── Material Icons sizing ── */
+.material-icons {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.material-icons.text-sm {
+  font-size: 18px;
+}
+
+.material-icons.text-lg {
+  font-size: 24px;
+}
+
+.material-icons.text-xl {
+  font-size: 28px;
+}
+
+.material-icons.text-3xl {
+  font-size: 36px;
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Register New Asset | GRAM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3c83f6",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101722",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Navigation / Header -->
+<header class="border-b border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-icons text-primary text-2xl">inventory_2</span>
+</div>
+<div>
+<h1 class="text-lg font-bold tracking-tight">GRAM</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400">IT Asset Management</p>
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<div class="hidden md:flex items-center space-x-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="hover:text-primary cursor-pointer transition-colors">Dashboard</span>
+<span class="material-icons text-xs">chevron_right</span>
+<span class="hover:text-primary cursor-pointer transition-colors">Assets</span>
+<span class="material-icons text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">New Asset</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600">
+<img alt="User Profile" data-alt="Close up portrait of a professional man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvhUwJycFJfrV2IZNHVaVZIYRLD_t4ieZWDESg2-1BXju_v6lh5m62O_zka_ACZqVixa7N6exuJDZOSBs__g1UQs8hpOVx5VRnvqoTlSkYwCiUYqmapyc_89QheFJtlcSMVUJeFUWCs9I7RNorCTIbxku4o-_HIPYE5luWXQm9UWQTVsZz0edbsVJFisJQLqAoijKaVK7sUrPOwNXkLlYIbDX_ZOjr5j9dqe2_Dfbjz2h6jHjTazWH1T1OD_MBx8IaIBiFm8Hoyfmb"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Sidebar / Info Panel -->
+<aside class="w-full lg:w-1/4 space-y-6">
+<div class="bg-white dark:bg-slate-900/40 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<h3 class="font-semibold text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">Registration Progress</h3>
+<div class="space-y-4">
+<div class="flex items-center space-x-3 text-primary">
+<span class="material-icons text-lg">check_circle</span>
+<span class="text-sm font-medium">Basic Information</span>
+</div>
+<div class="flex items-center space-x-3 text-slate-400">
+<span class="material-icons text-lg">radio_button_unchecked</span>
+<span class="text-sm">Dynamic Specifications</span>
+</div>
+<div class="flex items-center space-x-3 text-slate-400">
+<span class="material-icons text-lg">radio_button_unchecked</span>
+<span class="text-sm">Compliance Check</span>
+</div>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden bg-primary/5 border border-primary/20 p-6">
+<div class="flex items-center space-x-2 mb-2">
+<span class="material-icons text-primary text-sm">info</span>
+<h4 class="text-sm font-semibold text-primary">Asset Guidelines</h4>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Ensure all virtual resources are tagged according to ISO-27001 standards. Mandatory fields for VM assets include RAM and Hypervisor allocation.
+                    </p>
+</div>
+</aside>
+<!-- Main Form Section -->
+<section class="flex-1">
+<form action="#" class="space-y-8">
+<!-- Section 1: Basic Info -->
+<div class="bg-white dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-primary">assignment</span>
+<h2 class="font-semibold text-lg">Basic Information</h2>
+</div>
+<span class="text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded">Step 1 of 2</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Asset Name</label>
+<input class="w-full px-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="e.g. Production-DB-01" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Asset Type</label>
+<select class="w-full px-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all appearance-none cursor-pointer">
+<option selected="" value="vm">Virtual Machine (VM)</option>
+<option value="server">Physical Server</option>
+<option value="workstation">Workstation</option>
+<option value="network">Network Gear</option>
+<option value="storage">Storage Array</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Operational Status</label>
+<div class="flex items-center space-x-4">
+<label class="flex items-center space-x-2 cursor-pointer group">
+<input checked="" class="text-primary focus:ring-primary bg-transparent border-slate-400" name="status" type="radio"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">Active</span>
+</label>
+<label class="flex items-center space-x-2 cursor-pointer group">
+<input class="text-primary focus:ring-primary bg-transparent border-slate-400" name="status" type="radio"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">Maintenance</span>
+</label>
+<label class="flex items-center space-x-2 cursor-pointer group">
+<input class="text-primary focus:ring-primary bg-transparent border-slate-400" name="status" type="radio"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">Retired</span>
+</label>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Tags</label>
+<div class="relative">
+<input class="w-full px-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" placeholder="Add tags (Enter to add)" type="text"/>
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-xs font-medium border border-primary/20">
+                                            Critical <button class="ml-1 material-icons text-[10px]">close</button>
+</span>
+<span class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-xs font-medium border border-primary/20">
+                                            Database <button class="ml-1 material-icons text-[10px]">close</button>
+</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Description</label>
+<textarea class="w-full px-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all resize-none" placeholder="Provide a detailed description of the asset's purpose..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<!-- Section 2: Dynamic Specifications (Context: VM selected) -->
+<div class="bg-white dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden relative">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-primary">settings_input_component</span>
+<h2 class="font-semibold text-lg">Dynamic Specifications <span class="text-slate-400 font-normal text-sm ml-2">(Virtual Machine)</span></h2>
+</div>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">IP Address</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-icons text-slate-400 text-sm">lan</span>
+<input class="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" type="text" value="192.168.1.104"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Operating System</label>
+<select class="w-full px-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all">
+<option>Ubuntu Server 22.04 LTS</option>
+<option>Windows Server 2022</option>
+<option>CentOS Stream 9</option>
+<option>Debian 12</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">vCPU Allocation</label>
+<div class="flex items-center space-x-3">
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<span class="w-12 text-center font-bold text-primary">8</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">RAM (GB)</label>
+<div class="flex items-center space-x-3">
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<span class="w-12 text-center font-bold text-primary">32</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Hypervisor</label>
+<select class="w-full px-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all">
+<option>VMware ESXi 8.0</option>
+<option>Proxmox VE 8.1</option>
+<option>Microsoft Hyper-V</option>
+<option>Nutanix AHV</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Storage Pool</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-icons text-slate-400 text-sm">storage</span>
+<input class="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" placeholder="NVMe-Tier-01" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-800">
+<button class="order-2 sm:order-1 flex items-center px-6 py-2.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors font-medium" type="button">
+<span class="material-icons text-sm mr-2">delete_outline</span>
+                            Discard Changes
+                        </button>
+<div class="order-1 sm:order-2 flex items-center space-x-4 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 py-2.5 border border-slate-300 dark:border-slate-700 rounded-lg font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" type="button">
+                                Save as Draft
+                            </button>
+<button class="flex-1 sm:flex-none px-8 py-2.5 bg-gradient-to-r from-primary to-[#06b6d4] text-white rounded-lg font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.02] transition-all flex items-center justify-center" type="submit">
+<span class="material-icons text-sm mr-2">save</span>
+                                Save Asset
+                            </button>
+</div>
+</div>
+</form>
+</section>
+</div>
+</main>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 -z-10 w-1/2 h-1/2 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-1/3 h-1/3 bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
+</body></html>

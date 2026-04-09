@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Asset Definitions | GRAM ITAM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#3c83f6",
+                "background-light": "#f5f7f8",
+                "background-dark": "#101722",
+              },
+              fontFamily: {
+                "display": ["Inter", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(60, 131, 246, 0.4);
+            box-shadow: 0 0 20px rgba(60, 131, 246, 0.15);
+        }
+        .search-glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Navigation / Header -->
+<nav class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-icons text-white text-xl">account_tree</span>
+</div>
+<span class="text-xl font-bold tracking-tight">GRAM <span class="text-primary">ITAM</span></span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-500">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="text-xs font-bold text-primary">JD</span>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Page Action Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+<div>
+<h1 class="text-3xl font-bold">Asset Definitions</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Manage and configure your IT resource schemas</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<div class="relative w-full sm:w-80">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="search-glass w-full pl-10 pr-4 py-2.5 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all dark:text-white" placeholder="Search definitions..." type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg flex items-center gap-2 font-semibold transition-all shadow-lg shadow-primary/20">
+<span class="material-icons text-lg">add_circle_outline</span>
+<span>Create New</span>
+</button>
+</div>
+</div>
+<!-- Definition Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Card: Virtual Machine -->
+<div class="glass-card rounded-xl p-6 flex flex-col h-full group transition-all duration-300">
+<div class="flex items-start justify-between mb-4">
+<div class="p-3 bg-primary/10 rounded-xl text-primary border border-primary/20">
+<span class="material-icons text-3xl">dns</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white" title="Edit">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 rounded-lg text-slate-400 hover:text-red-400" title="Delete">
+<span class="material-icons text-sm">delete</span>
+</button>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Virtual Machine</h3>
+<p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Schema for cloud and on-premise virtualized compute instances.</p>
+<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fields</span>
+<span class="text-lg font-semibold text-primary">24</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Assets</span>
+<span class="text-lg font-semibold">1,204</span>
+</div>
+</div>
+</div>
+<!-- Card: Network Switch -->
+<div class="glass-card rounded-xl p-6 flex flex-col h-full group transition-all duration-300">
+<div class="flex items-start justify-between mb-4">
+<div class="p-3 bg-cyan-500/10 rounded-xl text-cyan-400 border border-cyan-400/20">
+<span class="material-icons text-3xl">router</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 rounded-lg text-slate-400 hover:text-red-400">
+<span class="material-icons text-sm">delete</span>
+</button>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Network Switch</h3>
+<p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Configuration for Layer 2/3 enterprise switching hardware.</p>
+<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fields</span>
+<span class="text-lg font-semibold text-cyan-400">18</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Assets</span>
+<span class="text-lg font-semibold">86</span>
+</div>
+</div>
+</div>
+<!-- Card: Database Server -->
+<div class="glass-card rounded-xl p-6 flex flex-col h-full group transition-all duration-300">
+<div class="flex items-start justify-between mb-4">
+<div class="p-3 bg-indigo-500/10 rounded-xl text-indigo-400 border border-indigo-400/20">
+<span class="material-icons text-3xl">storage</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 rounded-lg text-slate-400 hover:text-red-400">
+<span class="material-icons text-sm">delete</span>
+</button>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Database Server</h3>
+<p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Properties for relational and NoSQL database management systems.</p>
+<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fields</span>
+<span class="text-lg font-semibold text-indigo-400">32</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Assets</span>
+<span class="text-lg font-semibold">412</span>
+</div>
+</div>
+</div>
+<!-- Card: Firewall -->
+<div class="glass-card rounded-xl p-6 flex flex-col h-full group transition-all duration-300">
+<div class="flex items-start justify-between mb-4">
+<div class="p-3 bg-red-500/10 rounded-xl text-red-400 border border-red-400/20">
+<span class="material-icons text-3xl">security</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 rounded-lg text-slate-400 hover:text-red-400">
+<span class="material-icons text-sm">delete</span>
+</button>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Firewall</h3>
+<p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Security appliance definition including rulesets and zone mapping.</p>
+<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fields</span>
+<span class="text-lg font-semibold text-red-400">15</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Assets</span>
+<span class="text-lg font-semibold">12</span>
+</div>
+</div>
+</div>
+<!-- Card: Load Balancer -->
+<div class="glass-card rounded-xl p-6 flex flex-col h-full group transition-all duration-300">
+<div class="flex items-start justify-between mb-4">
+<div class="p-3 bg-amber-500/10 rounded-xl text-amber-400 border border-amber-400/20">
+<span class="material-icons text-3xl">reorder</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 rounded-lg text-slate-400 hover:text-red-400">
+<span class="material-icons text-sm">delete</span>
+</button>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Load Balancer</h3>
+<p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Application delivery controller configuration and VIP details.</p>
+<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fields</span>
+<span class="text-lg font-semibold text-amber-400">21</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Assets</span>
+<span class="text-lg font-semibold">45</span>
+</div>
+</div>
+</div>
+<!-- Card: Physical Server -->
+<div class="glass-card rounded-xl p-6 flex flex-col h-full group transition-all duration-300">
+<div class="flex items-start justify-between mb-4">
+<div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-400 border border-emerald-400/20">
+<span class="material-icons text-3xl">computer</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 rounded-lg text-slate-400 hover:text-red-400">
+<span class="material-icons text-sm">delete</span>
+</button>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Physical Server</h3>
+<p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Bare metal hardware management including rack location and BIOS.</p>
+<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fields</span>
+<span class="text-lg font-semibold text-emerald-400">44</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Assets</span>
+<span class="text-lg font-semibold">238</span>
+</div>
+</div>
+</div>
+<!-- Card: Storage Array -->
+<div class="glass-card rounded-xl p-6 flex flex-col h-full group transition-all duration-300">
+<div class="flex items-start justify-between mb-4">
+<div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 border border-purple-400/20">
+<span class="material-icons text-3xl">hard_drive</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 hover:bg-red-500/20 rounded-lg text-slate-400 hover:text-red-400">
+<span class="material-icons text-sm">delete</span>
+</button>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-2">Storage Array</h3>
+<p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">SAN/NAS storage management including LUNs and RAID levels.</p>
+<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fields</span>
+<span class="text-lg font-semibold text-purple-400">19</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Assets</span>
+<span class="text-lg font-semibold">14</span>
+</div>
+</div>
+</div>
+<!-- Placeholder: Add New Card -->
+<div class="border-2 border-dashed border-slate-700 rounded-xl p-6 flex flex-col items-center justify-center text-slate-500 hover:border-primary hover:text-primary transition-all cursor-pointer bg-transparent group min-h-[220px]">
+<div class="p-3 bg-slate-800 rounded-full mb-3 group-hover:bg-primary/10 transition-colors">
+<span class="material-icons text-3xl">add</span>
+</div>
+<span class="font-semibold">New Definition</span>
+</div>
+</div>
+<!-- System Stats Footer -->
+<div class="mt-12 flex flex-wrap items-center justify-between py-6 border-t border-slate-800 text-sm text-slate-500">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>System Online</span>
+</div>
+<div>Total Definitions: <span class="text-slate-200">28</span></div>
+<div>Last Updated: <span class="text-slate-200">12 mins ago</span></div>
+</div>
+<div class="mt-4 sm:mt-0 flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed top-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+</body></html>
