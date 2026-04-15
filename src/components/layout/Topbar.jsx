@@ -40,7 +40,7 @@ export default function Topbar() {
                 <div className="topbar__user">
                     <div className="topbar__user-info">
                         <p className="topbar__user-name">Admin User</p>
-                        <p className="topbar__user-role">System Architect</p>
+                        {/* <p className="topbar__user-role">System Architect</p> */}
                     </div>
                     <div className="topbar__avatar">
                         <span className="material-icons">person</span>

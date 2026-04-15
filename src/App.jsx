@@ -6,6 +6,7 @@ import DefinitionsPage from './pages/DefinitionsPage'
 import CreateDefinitionPage from './pages/CreateDefinitionPage'
 import AssetManagerPage from './pages/AssetManagerPage'
 import CreateAssetPage from './pages/CreateAssetPage'
+import AssetImportPage from './pages/AssetImportPage'
 import AssetDetailPage from './pages/AssetDetailPage'
 import RelationshipsPage from './pages/RelationshipsPage'
 import CreateRelationshipPage from './pages/CreateRelationshipPage'
@@ -67,6 +68,7 @@ export default function App() {
 
                                 {/* Assets */}
                                 <Route path="/assets" element={<AssetManagerPage />} />
+                                <Route path="/assets/import" element={<AssetImportPage />} />
                                 <Route path="/assets/new" element={<CreateAssetPage />} />
                                 <Route path="/assets/:id/edit" element={<CreateAssetPage />} />
                                 <Route path="/assets/:id" element={<AssetDetailPage />} />

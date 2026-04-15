@@ -7,6 +7,7 @@ import './DefinitionsPage.css'
 export default function DefinitionsPage() {
     const navigate = useNavigate()
     const definitions = useDefinitionStore((s) => s.definitions)
+    const deleteDefinition = useDefinitionStore((s) => s.deleteDefinition)
     const assets = useAssetStore((s) => s.assets)
 
     const [search, setSearch] = useState('')
@@ -18,6 +19,24 @@ export default function DefinitionsPage() {
 
     function getAssetCount(defId) {
         return assets.filter((a) => a.definitionId === defId).length
+    }
+
+    function getFieldCount(def) {
+        return def.fields ? def.fields.length : 0
+    }
+
+    function handleDelete(event, defId) {
+        event.stopPropagation()
+
+        const assetCount = getAssetCount(defId)
+        if (assetCount > 0) {
+            alert('Cannot delete a definition while assets are still using it. Remove or reassign those assets first.')
+            return
+        }
+
+        if (window.confirm('Delete this definition? This cannot be undone.')) {
+            deleteDefinition(defId)
+        }
     }
 
     function getFieldCount(def) {
@@ -81,6 +100,17 @@ export default function DefinitionsPage() {
                             <p className="def-card__desc">{def.description}</p>
 
                             {/* Stats */}
+                            <button
+                                type="button"
+                                className="def-card__delete-btn"
+                                onClick={(e) => handleDelete(e, def.id)}
+                                disabled={getAssetCount(def.id) > 0}
+                                title={getAssetCount(def.id) > 0 ? 'Cannot delete a definition with linked assets.' : 'Delete this definition'}
+                            >
+                                <span className="material-icons">delete_outline</span>
+                                Delete Definition
+                            </button>
+
                             <div className="def-card__stats">
                                 <div className="def-card__stat">
                                     <span className="def-card__stat-label">Fields</span>

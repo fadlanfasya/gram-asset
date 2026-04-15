@@ -11,6 +11,8 @@ export default function AssetManagerPage() {
     const getDefinition = useDefinitionStore((s) => s.getDefinition)
     const definitions = useDefinitionStore((s) => s.definitions)
 
+    const fetchAssets = useAssetStore((state) => state.fetchAssets);
+
     const [search, setSearch] = useState('')
     const [typeFilter, setTypeFilter] = useState('all')
     const [statusFilter, setStatusFilter] = useState('all')
@@ -33,13 +35,23 @@ export default function AssetManagerPage() {
                     <h1 className="asset-page__title">Asset Manager</h1>
                     <p className="asset-page__subtitle">Track and manage your entire IT infrastructure inventory.</p>
                 </div>
-                <button
-                    className="asset-page__create-btn"
-                    onClick={() => navigate('/assets/new')}
-                >
-                    <span className="material-icons">add_circle</span>
-                    Create Asset
-                </button>
+                <div className="asset-page__header-actions">
+                    <button
+                        className="asset-page__import-btn"
+                        onClick={() => navigate('/assets/import')}
+                    >
+                        <span className="material-icons">upload_file</span>
+                        Import CSV
+                    </button>
+
+                    <button
+                        className="asset-page__create-btn"
+                        onClick={() => navigate('/assets/new')}
+                    >
+                        <span className="material-icons">add</span>
+                        Create Asset
+                    </button>
+                </div>
             </div>
 
             {/* Filters Toolbar */}
