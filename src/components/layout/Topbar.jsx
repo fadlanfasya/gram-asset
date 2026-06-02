@@ -1,8 +1,16 @@
+import { useNavigate } from 'react-router-dom'
 import './Topbar.css'
+import useAuthStore from '../../stores/useAuthStore'
 import useThemeStore from '../../stores/useThemeStore'
 
 export default function Topbar() {
+    const navigate = useNavigate()
+    const user = useAuthStore((s) => s.user)
     const { theme, toggleTheme } = useThemeStore()
+
+    const handleProfileClick = () => {
+        navigate('/profile')
+    }
 
     return (
         <header className="topbar">
@@ -37,10 +45,10 @@ export default function Topbar() {
 
                 <div className="topbar__divider"></div>
 
-                <div className="topbar__user">
+                <div className="topbar__user" onClick={handleProfileClick}>
                     <div className="topbar__user-info">
-                        <p className="topbar__user-name">Admin User</p>
-                        {/* <p className="topbar__user-role">System Architect</p> */}
+                        <p className="topbar__user-name">{user?.name || 'User'}</p>
+                        <p className="topbar__user-role">View profile</p>
                     </div>
                     <div className="topbar__avatar">
                         <span className="material-icons">person</span>

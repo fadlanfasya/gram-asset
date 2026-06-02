@@ -11,6 +11,7 @@ import AssetDetailPage from './pages/AssetDetailPage'
 import RelationshipsPage from './pages/RelationshipsPage'
 import CreateRelationshipPage from './pages/CreateRelationshipPage'
 import UserManagementPage from './pages/UserManagementPage'
+import ProfilePage from './pages/ProfilePage'
 import LoginPage from './pages/LoginPage'
 import useAuthStore from './stores/useAuthStore'
 import useDefinitionStore from './stores/useDefinitionStore'
@@ -80,9 +81,30 @@ export default function App() {
                                 <Route path="/" element={<DashboardPage />} />
 
                                 {/* Definitions */}
-                                <Route path="/definitions" element={<DefinitionsPage />} />
-                                <Route path="/definitions/new" element={<CreateDefinitionPage />} />
-                                <Route path="/definitions/:id/edit" element={<CreateDefinitionPage />} />
+                                <Route
+                                    path="/definitions"
+                                    element={
+                                        <RequireAdmin>
+                                            <DefinitionsPage />
+                                        </RequireAdmin>
+                                    }
+                                />
+                                <Route
+                                    path="/definitions/new"
+                                    element={
+                                        <RequireAdmin>
+                                            <CreateDefinitionPage />
+                                        </RequireAdmin>
+                                    }
+                                />
+                                <Route
+                                    path="/definitions/:id/edit"
+                                    element={
+                                        <RequireAdmin>
+                                            <CreateDefinitionPage />
+                                        </RequireAdmin>
+                                    }
+                                />
 
                                 {/* Assets */}
                                 <Route path="/assets" element={<AssetManagerPage />} />
@@ -94,6 +116,9 @@ export default function App() {
                                 {/* Relationships */}
                                 <Route path="/relationships" element={<RelationshipsPage />} />
                                 <Route path="/relationships/new" element={<CreateRelationshipPage />} />
+
+                                {/* User Profile */}
+                                <Route path="/profile" element={<ProfilePage />} />
 
                                 {/* Admin - User Management */}
                                 <Route

@@ -4,12 +4,12 @@ import './Sidebar.css'
 
 const navItems = [
     { to: '/', icon: 'dashboard', label: 'Dashboard' },
-    { to: '/definitions', icon: 'account_tree', label: 'Definitions' },
     { to: '/assets', icon: 'inventory_2', label: 'Assets' },
     { to: '/relationships', icon: 'hub', label: 'Relationships' },
 ]
 
 const adminNavItems = [
+    { to: '/definitions', icon: 'account_tree', label: 'Definitions' },
     { to: '/users', icon: 'group', label: 'User Management' },
 ]
 

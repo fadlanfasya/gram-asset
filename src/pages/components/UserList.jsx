@@ -18,7 +18,6 @@ export default function UserList({ users, onEdit, onDelete, onChangeRole, curren
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Status</th>
                             <th>Created</th>
                             <th>Actions</th>
                         </tr>
@@ -45,12 +44,8 @@ export default function UserList({ users, onEdit, onDelete, onChangeRole, curren
                                     >
                                         <option value="user">User</option>
                                         <option value="admin">Admin</option>
+                                        <option value="viewer">Viewer</option>
                                     </select>
-                                </td>
-                                <td>
-                                    <span className={`status ${user.status === 'active' ? 'active' : 'inactive'}`}>
-                                        {user.status === 'active' ? '✓ Active' : '○ Inactive'}
-                                    </span>
                                 </td>
                                 <td className="created-date">
                                     {new Date(user.createdAt).toLocaleDateString()}

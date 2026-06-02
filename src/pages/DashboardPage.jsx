@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import useDefinitionStore from '../stores/useDefinitionStore'
 import useAssetStore from '../stores/useAssetStore'
 import useRelationshipStore from '../stores/useRelationshipStore'
+import useAuthStore from '../stores/useAuthStore'
 import { StatCard, StatusBadge } from '../components/shared/StatCard'
 import './DashboardPage.css'
 
@@ -47,6 +48,8 @@ export default function DashboardPage() {
         : 0
 
     const getDefinition = useDefinitionStore((s) => s.getDefinition)
+    const user = useAuthStore((s) => s.user)
+    const isAdmin = user?.role === 'admin'
 
     return (
         <div className="dashboard">
@@ -169,13 +172,15 @@ export default function DashboardPage() {
                                 <span className="material-icons">add_circle</span>
                                 New Asset
                             </button>
-                            <button
-                                className="dashboard__btn dashboard__btn--outline"
-                                onClick={() => navigate('/definitions/new')}
-                            >
-                                <span className="material-icons">description</span>
-                                New Definition
-                            </button>
+                            {isAdmin && (
+                                <button
+                                    className="dashboard__btn dashboard__btn--outline"
+                                    onClick={() => navigate('/definitions/new')}
+                                >
+                                    <span className="material-icons">description</span>
+                                    New Definition
+                                </button>
+                            )}
                             <button
                                 className="dashboard__btn dashboard__btn--outline"
                                 onClick={() => navigate('/relationships')}

@@ -7,8 +7,7 @@ export default function UserForm({ user, onSubmit, onClose }) {
         name: '',
         email: '',
         password: '',
-        role: 'user',
-        status: 'active'
+        role: 'user'
     })
 
     const [errors, setErrors] = useState({})
@@ -20,8 +19,7 @@ export default function UserForm({ user, onSubmit, onClose }) {
                 name: user.name || '',
                 email: user.email || '',
                 password: '', // Never pre-fill password
-                role: user.role || 'user',
-                status: user.status || 'active'
+                role: user.role || 'user'
             })
         }
     }, [user])
@@ -165,20 +163,7 @@ export default function UserForm({ user, onSubmit, onClose }) {
                             >
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
-                            </select>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="status">Status</label>
-                            <select
-                                id="status"
-                                name="status"
-                                value={formData.status}
-                                onChange={handleChange}
-                                className="form-select"
-                            >
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="viewer">Viewer</option>
                             </select>
                         </div>
                     </div>
