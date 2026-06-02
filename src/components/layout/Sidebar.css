@@ -99,6 +99,21 @@
     color: var(--color-red);
 }
 
+.sidebar__divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: var(--space-2) 0;
+}
+
+.sidebar__section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: var(--space-3) var(--space-4);
+    letter-spacing: 0.05em;
+}
+
 
 /* Footer */
 .sidebar__footer {

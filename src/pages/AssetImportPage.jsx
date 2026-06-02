@@ -114,8 +114,14 @@ export default function AssetImportPage() {
 
   const dynamicFieldKeys = useMemo(() => {
     if (!activeDefinition) return []
-    return activeDefinition.fields.map((field) => field.name)
-  }, [activeDefinition])
+    return activeDefinition.fields.map((field) => ({
+      name: field.name,
+      label:
+        field.type === 'relationship'
+          ? `${field.name} (links to ${definitions.find((def) => def.id === field.targetDefinitionId)?.name || 'another type'})`
+          : field.name,
+    }))
+  }, [activeDefinition, definitions])
 
   const handleSelectFile = async (event) => {
     const selectedFile = event.target.files?.[0]
@@ -285,12 +291,12 @@ export default function AssetImportPage() {
               ))}
             </select>
           </div>
-          {dynamicFieldKeys.map((fieldName) => (
-            <div className="mapping-row" key={fieldName}>
-              <label>{fieldName}</label>
+          {dynamicFieldKeys.map((field) => (
+            <div className="mapping-row" key={field.name}>
+              <label>{field.label}</label>
               <select
-                value={mapping[fieldName] || ''}
-                onChange={(e) => handleMappingChange(fieldName, e.target.value)}
+                value={mapping[field.name] || ''}
+                onChange={(e) => handleMappingChange(field.name, e.target.value)}
               >
                 {availableHeaders.map((header) => (
                   <option key={header} value={header}>{header || '-- Skip --'}</option>

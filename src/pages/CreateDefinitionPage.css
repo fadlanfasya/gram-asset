@@ -381,6 +381,21 @@
     flex-shrink: 0;
 }
 
+.field-row__relationship {
+    flex-shrink: 0;
+    min-width: 220px;
+}
+
+.field-row__relationship select,
+.field-row__relationship .form-input {
+    width: 220px;
+}
+
+.field-row__relationship--empty {
+    color: var(--text-dim);
+    font-size: 0.8125rem;
+}
+
 .field-row__type {
     padding: 0.375rem 0.75rem;
     padding-right: 2rem;

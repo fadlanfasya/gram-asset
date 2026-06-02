@@ -71,6 +71,18 @@ export default function DynamicFieldRenderer({ field, value, onChange, error }) 
             )
             break
 
+        case 'relationship':
+            inputElement = (
+                <input
+                    type="text"
+                    value={value || ''}
+                    placeholder={field.targetDefinitionId ? `Select a ${field.targetDefinitionId}` : `Enter ${field.name}`}
+                    onChange={handleChange}
+                    {...commonProps}
+                />
+            )
+            break
+
         case 'boolean':
             return (
                 <div className="form-group form-group--checkbox">

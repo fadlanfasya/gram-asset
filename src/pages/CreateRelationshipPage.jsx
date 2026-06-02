@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAssetStore from '../stores/useAssetStore'
+import useDefinitionStore from '../stores/useDefinitionStore'
 import useRelationshipStore from '../stores/useRelationshipStore'
 import './CreateRelationshipPage.css'
 
@@ -15,16 +16,74 @@ const RELATIONSHIP_TYPES = [
 export default function CreateRelationshipPage() {
     const navigate = useNavigate()
     const assets = useAssetStore((s) => s.assets)
+    const definitions = useDefinitionStore((s) => s.definitions)
     const addRelationship = useRelationshipStore((s) => s.addRelationship)
     const relationships = useRelationshipStore((s) => s.relationships)
 
     const [sourceId, setSourceId] = useState('')
     const [targetId, setTargetId] = useState('')
+    const [sourceDefId, setSourceDefId] = useState('')
+    const [targetDefId, setTargetDefId] = useState('')
     const [type, setType] = useState('depends_on')
     const [error, setError] = useState('')
+    const [sourceSearch, setSourceSearch] = useState('')
+    const [targetSearch, setTargetSearch] = useState('')
+    const [sourceOpen, setSourceOpen] = useState(false)
+    const [targetOpen, setTargetOpen] = useState(false)
 
-    // Filter available targets to avoid self-reference or duplicates (optional)
     const availableTargets = assets.filter(a => a.id !== sourceId)
+    const sourceOptions = assets
+        .filter(a => !sourceDefId || a.definitionId === sourceDefId)
+        .filter(a => a.name.toLowerCase().includes(sourceSearch.toLowerCase()))
+    const targetOptions = availableTargets
+        .filter(a => !targetDefId || a.definitionId === targetDefId)
+        .filter(a => a.name.toLowerCase().includes(targetSearch.toLowerCase()))
+
+    const handleSelectSource = (asset) => {
+        setSourceId(asset.id)
+        setSourceSearch(asset.name)
+        setSourceOpen(false)
+        setTargetId('')
+        setTargetSearch('')
+    }
+
+    const handleSelectTarget = (asset) => {
+        setTargetId(asset.id)
+        setTargetSearch(asset.name)
+        setTargetOpen(false)
+    }
+
+    const handleSourceSearchChange = (value) => {
+        setSourceSearch(value)
+        setSourceOpen(true)
+        if (assets.find(a => a.name === value)?.id !== sourceId) {
+            setSourceId('')
+            setTargetId('')
+            setTargetSearch('')
+        }
+    }
+
+    const handleTargetSearchChange = (value) => {
+        setTargetSearch(value)
+        setTargetOpen(true)
+        if (availableTargets.find(a => a.name === value)?.id !== targetId) {
+            setTargetId('')
+        }
+    }
+
+    const handleSourceDefChange = (value) => {
+        setSourceDefId(value)
+        setSourceId('')
+        setSourceSearch('')
+        setTargetId('')
+        setTargetSearch('')
+    }
+
+    const handleTargetDefChange = (value) => {
+        setTargetDefId(value)
+        setTargetId('')
+        setTargetSearch('')
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -53,7 +112,7 @@ export default function CreateRelationshipPage() {
     }
 
     const selectedSource = assets.find(a => a.id === sourceId)
-    const selectedTarget = assets.find(a => a.id === availableTargets.find(t => t.id === targetId)?.id)
+    const selectedTarget = assets.find(a => a.id === targetId)
 
     return (
         <div className="create-rel-page">
@@ -74,19 +133,53 @@ export default function CreateRelationshipPage() {
                     <div className="rel-form-row">
                         {/* Source */}
                         <div className="rel-input-group">
-                            <label>Source Asset</label>
+                            <label>Source Definition</label>
                             <div className="select-wrapper">
                                 <select
-                                    value={sourceId}
-                                    onChange={(e) => setSourceId(e.target.value)}
-                                    className={!sourceId ? 'is-placeholder' : ''}
+                                    value={sourceDefId}
+                                    onChange={(e) => handleSourceDefChange(e.target.value)}
+                                    className={!sourceDefId ? 'is-placeholder' : ''}
                                 >
-                                    <option value="" disabled>Select Source...</option>
-                                    {assets.map(a => (
-                                        <option key={a.id} value={a.id}>{a.name}</option>
+                                    <option value="">Select definition...</option>
+                                    {definitions.map(def => (
+                                        <option key={def.id} value={def.id}>{def.name}</option>
                                     ))}
                                 </select>
                                 <span className="material-icons select-caret">expand_more</span>
+                            </div>
+                        </div>
+
+                        <div className="rel-input-group">
+                            <label>Source Asset</label>
+                            <div className="select-wrapper search-dropdown">
+                                <input
+                                    type="text"
+                                    className="search-input"
+                                    placeholder={sourceDefId ? 'Search source asset...' : 'Select definition first'}
+                                    value={sourceSearch}
+                                    onChange={(e) => handleSourceSearchChange(e.target.value)}
+                                    onFocus={() => setSourceOpen(true)}
+                                    disabled={!sourceDefId}
+                                />
+                                <span className="material-icons select-caret">search</span>
+                                {sourceOpen && sourceDefId && (
+                                    <div className="search-list">
+                                        {sourceOptions.length > 0 ? (
+                                            sourceOptions.map(asset => (
+                                                <button
+                                                    key={asset.id}
+                                                    type="button"
+                                                    className={`search-list-item ${asset.id === sourceId ? 'search-list-item--active' : ''}`}
+                                                    onClick={() => handleSelectSource(asset)}
+                                                >
+                                                    {asset.name}
+                                                </button>
+                                            ))
+                                        ) : (
+                                            <div className="search-list-empty">No source assets found</div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                             {selectedSource && (
                                 <div className="asset-preview">
@@ -116,20 +209,53 @@ export default function CreateRelationshipPage() {
 
                         {/* Target */}
                         <div className="rel-input-group">
-                            <label>Target Asset</label>
+                            <label>Target Definition</label>
                             <div className="select-wrapper">
                                 <select
-                                    value={targetId}
-                                    onChange={(e) => setTargetId(e.target.value)}
-                                    className={!targetId ? 'is-placeholder' : ''}
-                                    disabled={!sourceId}
+                                    value={targetDefId}
+                                    onChange={(e) => handleTargetDefChange(e.target.value)}
+                                    className={!targetDefId ? 'is-placeholder' : ''}
                                 >
-                                    <option value="" disabled>Select Target...</option>
-                                    {availableTargets.map(a => (
-                                        <option key={a.id} value={a.id}>{a.name}</option>
+                                    <option value="">Select definition...</option>
+                                    {definitions.map(def => (
+                                        <option key={def.id} value={def.id}>{def.name}</option>
                                     ))}
                                 </select>
                                 <span className="material-icons select-caret">expand_more</span>
+                            </div>
+                        </div>
+
+                        <div className="rel-input-group">
+                            <label>Target Asset</label>
+                            <div className="select-wrapper search-dropdown">
+                                <input
+                                    type="text"
+                                    className="search-input"
+                                    placeholder={targetDefId ? 'Search target asset...' : 'Select definition first'}
+                                    value={targetSearch}
+                                    onChange={(e) => handleTargetSearchChange(e.target.value)}
+                                    onFocus={() => setTargetOpen(true)}
+                                    disabled={!targetDefId}
+                                />
+                                <span className="material-icons select-caret">search</span>
+                                {targetOpen && targetDefId && (
+                                    <div className="search-list">
+                                        {targetOptions.length > 0 ? (
+                                            targetOptions.map(asset => (
+                                                <button
+                                                    key={asset.id}
+                                                    type="button"
+                                                    className={`search-list-item ${asset.id === targetId ? 'search-list-item--active' : ''}`}
+                                                    onClick={() => handleSelectTarget(asset)}
+                                                >
+                                                    {asset.name}
+                                                </button>
+                                            ))
+                                        ) : (
+                                            <div className="search-list-empty">No target assets found</div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                             {selectedTarget && (
                                 <div className="asset-preview">

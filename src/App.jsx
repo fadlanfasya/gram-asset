@@ -10,6 +10,7 @@ import AssetImportPage from './pages/AssetImportPage'
 import AssetDetailPage from './pages/AssetDetailPage'
 import RelationshipsPage from './pages/RelationshipsPage'
 import CreateRelationshipPage from './pages/CreateRelationshipPage'
+import UserManagementPage from './pages/UserManagementPage'
 import LoginPage from './pages/LoginPage'
 import useAuthStore from './stores/useAuthStore'
 import useDefinitionStore from './stores/useDefinitionStore'
@@ -36,6 +37,23 @@ function RequireAuth({ children }) {
 
     if (!isAuthenticated) {
         return <Navigate to="/login" state={{ from: location }} replace />
+    }
+
+    return children
+}
+
+// Admin-only Route Wrapper
+function RequireAdmin({ children }) {
+    const user = useAuthStore((s) => s.user)
+    const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+    const location = useLocation()
+
+    if (!isAuthenticated) {
+        return <Navigate to="/login" state={{ from: location }} replace />
+    }
+
+    if (user?.role !== 'admin') {
+        return <Navigate to="/" replace />
     }
 
     return children
@@ -76,6 +94,16 @@ export default function App() {
                                 {/* Relationships */}
                                 <Route path="/relationships" element={<RelationshipsPage />} />
                                 <Route path="/relationships/new" element={<CreateRelationshipPage />} />
+
+                                {/* Admin - User Management */}
+                                <Route
+                                    path="/users"
+                                    element={
+                                        <RequireAdmin>
+                                            <UserManagementPage />
+                                        </RequireAdmin>
+                                    }
+                                />
                             </Routes>
                         </PageShell>
                     </RequireAuth>

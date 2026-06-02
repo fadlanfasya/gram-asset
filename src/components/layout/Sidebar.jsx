@@ -9,9 +9,15 @@ const navItems = [
     { to: '/relationships', icon: 'hub', label: 'Relationships' },
 ]
 
+const adminNavItems = [
+    { to: '/users', icon: 'group', label: 'User Management' },
+]
+
 export default function Sidebar() {
     const logout = useAuthStore((s) => s.logout)
+    const user = useAuthStore((s) => s.user)
     const navigate = useNavigate()
+    const isAdmin = user?.role === 'admin'
 
     const handleLogout = () => {
         logout()
@@ -41,6 +47,25 @@ export default function Sidebar() {
                         {item.label}
                     </NavLink>
                 ))}
+
+                {isAdmin && (
+                    <>
+                        <div className="sidebar__divider"></div>
+                        <div className="sidebar__section-label">Admin</div>
+                        {adminNavItems.map((item) => (
+                            <NavLink
+                                key={item.to}
+                                to={item.to}
+                                className={({ isActive }) =>
+                                    `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
+                                }
+                            >
+                                <span className="material-icons">{item.icon}</span>
+                                {item.label}
+                            </NavLink>
+                        ))}
+                    </>
+                )}
 
                 <button className="sidebar__link sidebar__logout-btn" onClick={handleLogout}>
                     <span className="material-icons">logout</span>

@@ -20,6 +20,7 @@ const FIELD_TYPES = [
     { value: 'date', label: 'Date' },
     { value: 'boolean', label: 'Boolean' },
     { value: 'url', label: 'URL' },
+    { value: 'relationship', label: 'Relationship' },
 ]
 
 function emptyField() {
@@ -29,6 +30,7 @@ function emptyField() {
         type: 'text',
         required: false,
         options: [],
+        targetDefinitionId: '',
     }
 }
 
@@ -74,7 +76,13 @@ export default function CreateDefinitionPage() {
     }
 
     function handleFieldChange(fieldId, key, value) {
-        setFields(fields.map((f) => (f.id === fieldId ? { ...f, [key]: value } : f)))
+        setFields(fields.map((f) => {
+            if (f.id !== fieldId) return f
+            if (key === 'type' && value !== 'relationship') {
+                return { ...f, [key]: value, targetDefinitionId: '' }
+            }
+            return { ...f, [key]: value }
+        }))
         markChanged()
     }
 
@@ -281,6 +289,33 @@ export default function CreateDefinitionPage() {
                                     ))}
                                 </select>
                             </div>
+
+                            {field.type === 'relationship' && (() => {
+                                const linkedDefs = definitions.filter((def) => def.id !== id)
+
+                                if (linkedDefs.length === 0) {
+                                    return (
+                                        <div className="field-row__relationship field-row__relationship--empty">
+                                            <span>No other definitions available to link.</span>
+                                        </div>
+                                    )
+                                }
+
+                                return (
+                                    <div className="field-row__relationship">
+                                        <select
+                                            className="form-input"
+                                            value={field.targetDefinitionId || ''}
+                                            onChange={(e) => handleFieldChange(field.id, 'targetDefinitionId', e.target.value)}
+                                        >
+                                            <option value="">-- Select linked definition --</option>
+                                            {linkedDefs.map((def) => (
+                                                <option key={def.id} value={def.id}>{def.name}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )
+                            })()}
 
                             {/* Required Toggle */}
                             <label className="field-row__required">
