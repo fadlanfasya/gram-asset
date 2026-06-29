@@ -1,0 +1,139 @@
+.cost-modal {
+    width: min(100%, 520px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.cost-modal-resource {
+    margin: 0.2rem 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.cost-modal-error {
+    margin: 0 1.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background: var(--color-red-10);
+    color: var(--color-red);
+    font-size: 0.875rem;
+    border: 1px solid var(--color-red);
+}
+
+.cost-modal-body {
+    padding: 1.25rem 1.5rem 1.75rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* Cost table */
+.cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cost-table th,
+.cost-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.cost-table th {
+    background: var(--bg-table-header);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cost-table tfoot td {
+    border-top: 2px solid var(--border-color);
+    border-bottom: none;
+}
+
+.cost-empty {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.cost-year {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.cost-amount {
+    color: var(--color-green);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.cost-total-label {
+    font-weight: 700;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.cost-total {
+    font-weight: 700;
+    color: var(--color-green);
+    font-family: monospace;
+}
+
+/* Add cost form */
+.cost-add-form {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.cost-add-form h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.cost-add-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 0.75rem;
+    align-items: end;
+}
+
+.cost-add-row label {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.cost-add-row input {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.7rem 0.85rem;
+    background: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.cost-add-row input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.cost-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+}

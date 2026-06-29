@@ -10,6 +10,7 @@ import AssetImportPage from './pages/AssetImportPage'
 import AssetDetailPage from './pages/AssetDetailPage'
 import RelationshipsPage from './pages/RelationshipsPage'
 import CreateRelationshipPage from './pages/CreateRelationshipPage'
+import AtsPage from './pages/AtsPage'
 import UserManagementPage from './pages/UserManagementPage'
 import ProfilePage from './pages/ProfilePage'
 import LoginPage from './pages/LoginPage'
@@ -43,8 +44,8 @@ function RequireAuth({ children }) {
     return children
 }
 
-// Admin-only Route Wrapper
-function RequireAdmin({ children }) {
+// Role-gated Route Wrapper — pass allowedRoles array
+function RequireRole({ children, allowedRoles }) {
     const user = useAuthStore((s) => s.user)
     const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
     const location = useLocation()
@@ -53,7 +54,7 @@ function RequireAdmin({ children }) {
         return <Navigate to="/login" state={{ from: location }} replace />
     }
 
-    if (user?.role !== 'admin') {
+    if (!allowedRoles.includes(user?.role)) {
         return <Navigate to="/" replace />
     }
 
@@ -80,29 +81,29 @@ export default function App() {
                             <Routes>
                                 <Route path="/" element={<DashboardPage />} />
 
-                                {/* Definitions */}
+                                {/* Definitions — asset_admin + admin */}
                                 <Route
                                     path="/definitions"
                                     element={
-                                        <RequireAdmin>
+                                        <RequireRole allowedRoles={['admin', 'asset_admin']}>
                                             <DefinitionsPage />
-                                        </RequireAdmin>
+                                        </RequireRole>
                                     }
                                 />
                                 <Route
                                     path="/definitions/new"
                                     element={
-                                        <RequireAdmin>
+                                        <RequireRole allowedRoles={['admin', 'asset_admin']}>
                                             <CreateDefinitionPage />
-                                        </RequireAdmin>
+                                        </RequireRole>
                                     }
                                 />
                                 <Route
                                     path="/definitions/:id/edit"
                                     element={
-                                        <RequireAdmin>
+                                        <RequireRole allowedRoles={['admin', 'asset_admin']}>
                                             <CreateDefinitionPage />
-                                        </RequireAdmin>
+                                        </RequireRole>
                                     }
                                 />
 
@@ -120,13 +121,23 @@ export default function App() {
                                 {/* User Profile */}
                                 <Route path="/profile" element={<ProfilePage />} />
 
-                                {/* Admin - User Management */}
+                                {/* ATS Management — ats_admin + admin */}
+                                <Route
+                                    path="/ats"
+                                    element={
+                                        <RequireRole allowedRoles={['admin', 'ats_admin']}>
+                                            <AtsPage />
+                                        </RequireRole>
+                                    }
+                                />
+
+                                {/* User Management — super admin only */}
                                 <Route
                                     path="/users"
                                     element={
-                                        <RequireAdmin>
+                                        <RequireRole allowedRoles={['admin']}>
                                             <UserManagementPage />
-                                        </RequireAdmin>
+                                        </RequireRole>
                                     }
                                 />
                             </Routes>

@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import useAuthStore from '../../stores/useAuthStore'
+import { canManageAssets, canManageAts, canManageUsers } from '../../utils/roles'
 import './Sidebar.css'
 
 const navItems = [
@@ -8,16 +9,11 @@ const navItems = [
     { to: '/relationships', icon: 'hub', label: 'Relationships' },
 ]
 
-const adminNavItems = [
-    { to: '/definitions', icon: 'account_tree', label: 'Definitions' },
-    { to: '/users', icon: 'group', label: 'User Management' },
-]
-
 export default function Sidebar() {
     const logout = useAuthStore((s) => s.logout)
     const user = useAuthStore((s) => s.user)
     const navigate = useNavigate()
-    const isAdmin = user?.role === 'admin'
+    const role = user?.role
 
     const handleLogout = () => {
         logout()
@@ -48,22 +44,45 @@ export default function Sidebar() {
                     </NavLink>
                 ))}
 
-                {isAdmin && (
+                {canManageAssets(role) && (
+                    <>
+                        <div className="sidebar__divider"></div>
+                        <div className="sidebar__section-label">Asset Admin</div>
+                        <NavLink
+                            to="/definitions"
+                            className={({ isActive }) => `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`}
+                        >
+                            <span className="material-icons">account_tree</span>
+                            Definitions
+                        </NavLink>
+                    </>
+                )}
+
+                {canManageAts(role) && (
+                    <>
+                        <div className="sidebar__divider"></div>
+                        <div className="sidebar__section-label">ATS</div>
+                        <NavLink
+                            to="/ats"
+                            className={({ isActive }) => `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`}
+                        >
+                            <span className="material-icons">support_agent</span>
+                            ATS Management
+                        </NavLink>
+                    </>
+                )}
+
+                {canManageUsers(role) && (
                     <>
                         <div className="sidebar__divider"></div>
                         <div className="sidebar__section-label">Admin</div>
-                        {adminNavItems.map((item) => (
-                            <NavLink
-                                key={item.to}
-                                to={item.to}
-                                className={({ isActive }) =>
-                                    `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
-                                }
-                            >
-                                <span className="material-icons">{item.icon}</span>
-                                {item.label}
-                            </NavLink>
-                        ))}
+                        <NavLink
+                            to="/users"
+                            className={({ isActive }) => `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`}
+                        >
+                            <span className="material-icons">group</span>
+                            User Management
+                        </NavLink>
                     </>
                 )}
 

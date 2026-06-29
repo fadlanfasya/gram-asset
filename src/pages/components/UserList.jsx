@@ -1,4 +1,5 @@
-import { Trash2, Edit2, Shield, User } from 'lucide-react'
+import { Trash2, Edit2 } from 'lucide-react'
+import { ROLE_LABELS } from '../../utils/roles'
 import './UserList.css'
 
 export default function UserList({ users, onEdit, onDelete, onChangeRole, currentUserId }) {
@@ -36,15 +37,15 @@ export default function UserList({ users, onEdit, onDelete, onChangeRole, curren
                                 <td>{user.email}</td>
                                 <td>
                                     <select
-                                        value={user.role || 'user'}
+                                        value={user.role || 'viewer'}
                                         onChange={(e) => handleRoleChange(user.id, e)}
                                         className="role-select"
                                         disabled={currentUserId === user.id}
                                         title={currentUserId === user.id ? 'Cannot change your own role' : ''}
                                     >
-                                        <option value="user">User</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="viewer">Viewer</option>
+                                        {Object.entries(ROLE_LABELS).map(([value, label]) => (
+                                            <option key={value} value={value}>{label}</option>
+                                        ))}
                                     </select>
                                 </td>
                                 <td className="created-date">

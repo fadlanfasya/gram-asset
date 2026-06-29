@@ -1,0 +1,182 @@
+.ats-list {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.ats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.ats-table th,
+.ats-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+}
+
+.ats-table th {
+    background: var(--bg-table-header);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.ats-table tbody tr:hover {
+    background: var(--bg-hover);
+}
+
+.ats-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.ats-empty {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.ats-dim {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}
+
+/* Name */
+.ats-name-cell {
+    max-width: 240px;
+}
+
+.ats-name-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.ats-name-main {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.ats-name-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding-left: 0.25rem;
+    line-height: 1.4;
+}
+
+.ats-name-more {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    padding-left: 0.25rem;
+    font-style: italic;
+}
+
+/* Description */
+.ats-desc-cell {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Badges */
+.ats-badge {
+    display: inline-block;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge--green   { background: var(--color-green-10);  color: var(--color-green); }
+.badge--amber   { background: var(--color-amber-10);  color: var(--color-amber); }
+.badge--gray    { background: var(--border-color);    color: var(--text-muted); }
+.badge--red     { background: var(--color-red-10);    color: var(--color-red); }
+
+/* Period */
+.ats-period {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.ats-period-start { color: var(--text-muted); }
+.ats-period-end   { color: var(--text-secondary); }
+.ats-period--expired { color: var(--color-red) !important; }
+.ats-period--soon    { color: var(--color-amber) !important; }
+
+/* Cost chips */
+.ats-cost-chips {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.ats-cost-chip {
+    display: inline-block;
+    padding: 0.18rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    background: var(--color-green-10);
+    color: var(--color-green);
+    white-space: nowrap;
+}
+
+/* Asset chips */
+.ats-asset-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.ats-chip {
+    display: inline-block;
+    padding: 0.22rem 0.55rem;
+    border-radius: 999px;
+    background: var(--color-primary-10);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.ats-chip--more {
+    background: var(--bg-hover);
+    color: var(--text-muted);
+}
+
+/* Actions */
+.ats-actions {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.ats-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: var(--bg-hover);
+    color: var(--text-muted);
+    border-radius: 8px;
+    padding: 0.4rem;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.ats-action-btn:hover         { background: var(--color-primary-10);  color: var(--color-primary); }
+.ats-action-btn--cost:hover   { background: var(--color-green-10);    color: var(--color-green); }
+.ats-action-btn--asset:hover  { background: var(--color-purple-10);   color: var(--color-purple); }
+.ats-action-btn--danger:hover { background: var(--color-red-10);      color: var(--color-red); }

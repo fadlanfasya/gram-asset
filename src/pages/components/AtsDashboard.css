@@ -1,0 +1,172 @@
+.ats-dash { display: grid; gap: 1.5rem; }
+
+/* ── Summary strip ──────────────────────────────────────────────────────── */
+.ats-dash-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+@media (max-width: 900px) { .ats-dash-stats { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 580px) { .ats-dash-stats { grid-template-columns: repeat(2, 1fr); } }
+
+.ats-dash-stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    text-align: center;
+}
+.ats-dash-stat__val {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+.ats-dash-stat__lbl {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+/* ── Main row ───────────────────────────────────────────────────────────── */
+.ats-dash-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+@media (max-width: 800px) { .ats-dash-main { grid-template-columns: 1fr; } }
+
+/* ── Card ───────────────────────────────────────────────────────────────── */
+.ats-dash-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+}
+.ats-dash-card__head {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.ats-dash-empty {
+    padding: 1.4rem 1.4rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+/* ── Cost bars ──────────────────────────────────────────────────────────── */
+.ats-dash-cost-list {
+    padding: 1.1rem 1.4rem;
+    display: grid;
+    gap: 1.1rem;
+}
+.ats-dash-cost-row {
+    display: grid;
+    grid-template-columns: 2.8rem 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+}
+.ats-dash-cost-yr {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+.ats-dash-cost-val {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* ── Shared bar ─────────────────────────────────────────────────────────── */
+.ats-dash-bar-wrap {
+    height: 8px;
+    background: var(--bg-hover);
+    border-radius: 999px;
+    overflow: hidden;
+    flex: 1;
+}
+.ats-dash-bar {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.5s ease;
+}
+
+/* ── Group list ─────────────────────────────────────────────────────────── */
+.ats-dash-group-list {
+    padding: 1rem 1.4rem;
+    display: grid;
+    gap: 0.85rem;
+}
+.ats-dash-group-row {
+    display: grid;
+    grid-template-columns: 9rem 1fr 1.8rem;
+    align-items: center;
+    gap: 0.75rem;
+}
+.ats-dash-group-badge {
+    display: inline-block;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ats-dash-group-n {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+/* ── Expiring table ─────────────────────────────────────────────────────── */
+.ats-dash-exp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+.ats-dash-exp-table th {
+    padding: 0.55rem 1.4rem;
+    text-align: left;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    background: var(--bg-table-header);
+    font-weight: 600;
+}
+.ats-dash-exp-table td {
+    padding: 0.72rem 1.4rem;
+    border-top: 1px solid var(--border-subtle);
+    vertical-align: middle;
+}
+.ats-dash-exp-table tr:hover td { background: var(--bg-hover); }
+
+.ats-dash-exp-name {
+    font-weight: 500;
+    color: var(--text-primary);
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ats-dim {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+.ats-dash-days {
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ── Expired banner ─────────────────────────────────────────────────────── */
+.ats-dash-expired-banner { border-color: var(--color-red); }
+.ats-dash-expired-banner .ats-dash-card__head { border-color: var(--color-red-10); background: var(--color-red-10); }

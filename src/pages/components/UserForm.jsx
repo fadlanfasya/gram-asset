@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
+import { ROLE_LABELS } from '../../utils/roles'
 import './UserForm.css'
 
 export default function UserForm({ user, onSubmit, onClose }) {
@@ -7,7 +8,7 @@ export default function UserForm({ user, onSubmit, onClose }) {
         name: '',
         email: '',
         password: '',
-        role: 'user'
+        role: 'viewer'
     })
 
     const [errors, setErrors] = useState({})
@@ -18,8 +19,8 @@ export default function UserForm({ user, onSubmit, onClose }) {
             setFormData({
                 name: user.name || '',
                 email: user.email || '',
-                password: '', // Never pre-fill password
-                role: user.role || 'user'
+                password: '',
+                role: user.role || 'viewer'
             })
         }
     }, [user])
@@ -161,9 +162,9 @@ export default function UserForm({ user, onSubmit, onClose }) {
                                 onChange={handleChange}
                                 className="form-select"
                             >
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
-                                <option value="viewer">Viewer</option>
+                                {Object.entries(ROLE_LABELS).map(([value, label]) => (
+                                    <option key={value} value={value}>{label}</option>
+                                ))}
                             </select>
                         </div>
                     </div>

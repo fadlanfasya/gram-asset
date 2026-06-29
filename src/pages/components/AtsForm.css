@@ -1,0 +1,187 @@
+.ats-form-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 1200;
+}
+
+.ats-form-card {
+    width: min(100%, 600px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.ats-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.ats-form-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.ats-close-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    border-radius: 8px;
+    transition: color 150ms ease;
+}
+
+.ats-close-btn:hover {
+    color: var(--text-primary);
+}
+
+.ats-form-body {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.ats-form {
+    padding: 1.5rem;
+    display: grid;
+    gap: 1.1rem;
+}
+
+/* Field */
+.ats-field {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.ats-field input,
+.ats-field select,
+.ats-field textarea {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    background: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 150ms ease;
+    width: 100%;
+}
+
+.ats-field input:focus,
+.ats-field select:focus,
+.ats-field textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.ats-field textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+/* Checkbox field */
+.ats-field--check {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    padding-top: 1.5rem;
+}
+
+.ats-field--check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Row layout */
+.ats-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+}
+
+/* Hint text */
+.ats-form-hint {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    background: var(--bg-hover);
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    border-left: 3px solid var(--color-primary-50);
+}
+
+.ats-error-text {
+    color: var(--color-red);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+/* Actions */
+.ats-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.65rem;
+    padding-top: 0.25rem;
+}
+
+.ats-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.3rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 150ms ease;
+}
+
+.ats-btn--secondary {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.ats-btn--secondary:hover {
+    background: var(--border-color);
+}
+
+.ats-btn--primary {
+    background: var(--color-primary);
+    color: white;
+}
+
+.ats-btn--primary:hover {
+    background: var(--color-primary-hover);
+}
+
+@media (max-width: 480px) {
+    .ats-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .ats-field--check {
+        padding-top: 0;
+    }
+}

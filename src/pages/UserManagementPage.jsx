@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { userApi } from '../utils/userApi'
 import useAuthStore from '../stores/useAuthStore'
+import { ROLE_LABELS, canManageUsers } from '../utils/roles'
 import UserList from './components/UserList'
 import UserForm from './components/UserForm'
 import './UserManagementPage.css'
@@ -15,8 +16,7 @@ export default function UserManagementPage() {
     const [searchQuery, setSearchQuery] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
 
-    // Check if user is admin
-    const isAdmin = user?.role === 'admin'
+    const isAdmin = canManageUsers(user?.role)
 
     useEffect(() => {
         if (isAdmin) {
