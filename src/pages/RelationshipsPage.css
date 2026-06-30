@@ -142,9 +142,7 @@
 .rel-graph-area {
     flex: 1;
     position: relative;
-    background-color: #0b0e14;
-    background-image: radial-gradient(#2a2d3d 1px, transparent 1px);
-    background-size: 20px 20px;
+    background: var(--bg-primary);
 }
 
 .rel-top-bar {
@@ -155,28 +153,6 @@
     align-items: center;
     gap: var(--space-3);
     z-index: 5;
-}
-
-.status-pill {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.2);
-    border-radius: var(--radius-full);
-    color: var(--color-green);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.status-dot {
-    width: 6px;
-    height: 6px;
-    background: currentColor;
-    border-radius: 50%;
-    box-shadow: 0 0 8px currentColor;
 }
 
 .add-rel-btn {
@@ -242,12 +218,12 @@
 }
 
 .asset-node--selected .asset-node__box {
-    border-color: #fff;
-    box-shadow: 0 0 0 2px var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-50, color-mix(in srgb, var(--color-primary) 50%, transparent));
 }
 
 .asset-node--selected .asset-node__label {
-    color: #fff;
+    color: var(--color-primary);
     font-weight: 600;
 }
 
@@ -287,6 +263,18 @@
     border-radius: 50%;
 }
 
+/* Handles */
+.asset-handle {
+    background: var(--border-color) !important;
+    border-color: var(--bg-card) !important;
+}
+
+/* ReactFlow canvas background — must match so dots are visible over it */
+.react-flow__pane,
+.react-flow__background {
+    background: var(--bg-primary);
+}
+
 /* Controls Override */
 .react-flow__controls {
     background: var(--bg-card);
@@ -307,6 +295,12 @@
 
 .react-flow__controls-button:hover {
     background: var(--bg-hover);
+}
+
+/* Edge label */
+.react-flow__edge-label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
 }
 
 /* Minimap Override */

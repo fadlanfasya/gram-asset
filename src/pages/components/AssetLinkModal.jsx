@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { X, Unlink } from 'lucide-react'
 import { resourcesApi } from '../../utils/atsApi'
 import './AssetLinkModal.css'
 
 export default function AssetLinkModal({ resource, allAssets, onClose, onRefresh }) {
     const [linkedIds, setLinkedIds] = useState(resource.assets?.map((a) => a.id) || [])
-    const [search, setSearch] = useState('')
-    const [saving, setSaving] = useState(false)
-    const [error, setError] = useState('')
+    const [search, setSearch]       = useState('')
+    const [saving, setSaving]       = useState(false)
+    const [error, setError]         = useState('')
 
     const toggle = (id) => {
         setLinkedIds((prev) =>
@@ -29,25 +28,35 @@ export default function AssetLinkModal({ resource, allAssets, onClose, onRefresh
         }
     }
 
-    const filtered = allAssets.filter((a) =>
-        a.name.toLowerCase().includes(search.toLowerCase())
-    )
-
-    const linkedAssets = allAssets.filter((a) => linkedIds.includes(a.id))
+    const filtered      = allAssets.filter((a) => a.name.toLowerCase().includes(search.toLowerCase()))
+    const linkedAssets  = allAssets.filter((a) => linkedIds.includes(a.id))
     const unlinkedAssets = filtered.filter((a) => !linkedIds.includes(a.id))
 
     return (
         <div className="ats-form-overlay" onClick={onClose}>
-            <div className="asset-link-modal" onClick={(e) => e.stopPropagation()}>
+            <div
+                className="asset-link-modal"
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="asset-link-title"
+            >
                 <div className="ats-form-header">
                     <div>
-                        <h2>Hubungkan Aset</h2>
-                        <p className="asset-link-subtitle">{resource.name}</p>
+                        <h2 id="asset-link-title">Hubungkan Aset</h2>
+                        <p className="asset-link-subtitle">{resource.name.split('\n')[0]}</p>
                     </div>
-                    <button className="ats-close-btn" onClick={onClose}><X size={22} /></button>
+                    <button className="ats-close-btn" onClick={onClose} aria-label="Tutup">
+                        <span className="material-icons" aria-hidden="true">close</span>
+                    </button>
                 </div>
 
-                {error && <div className="asset-link-error">{error}</div>}
+                {error && (
+                    <div className="asset-link-error" role="alert">
+                        <span className="material-icons" aria-hidden="true">error</span>
+                        {error}
+                    </div>
+                )}
 
                 <div className="asset-link-body">
                     {linkedAssets.length > 0 && (
@@ -60,9 +69,11 @@ export default function AssetLinkModal({ resource, allAssets, onClose, onRefresh
                                         type="button"
                                         className="asset-chip asset-chip--linked"
                                         onClick={() => toggle(a.id)}
-                                        title="Klik untuk lepas"
+                                        title="Klik untuk melepas"
+                                        aria-label={`Lepas ${a.name}`}
                                     >
-                                        {a.name} <Unlink size={11} />
+                                        {a.name}
+                                        <span className="material-icons asset-chip__unlink" aria-hidden="true">link_off</span>
                                     </button>
                                 ))}
                             </div>
@@ -75,8 +86,9 @@ export default function AssetLinkModal({ resource, allAssets, onClose, onRefresh
                             type="search"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Cari aset..."
+                            placeholder="Cari aset…"
                             className="asset-link-search"
+                            aria-label="Cari aset"
                         />
                         <div className="asset-link-list">
                             {unlinkedAssets.length === 0 ? (
@@ -89,6 +101,7 @@ export default function AssetLinkModal({ resource, allAssets, onClose, onRefresh
                                     type="button"
                                     className="asset-link-item"
                                     onClick={() => toggle(a.id)}
+                                    aria-label={`Tambah ${a.name}`}
                                 >
                                     {a.name}
                                     {a.status && a.status !== 'active' && (
@@ -103,7 +116,7 @@ export default function AssetLinkModal({ resource, allAssets, onClose, onRefresh
                 <div className="asset-link-footer">
                     <button className="ats-btn ats-btn--secondary" onClick={onClose}>Batal</button>
                     <button className="ats-btn ats-btn--primary" onClick={handleSave} disabled={saving}>
-                        {saving ? 'Menyimpan...' : 'Simpan'}
+                        {saving ? 'Menyimpan…' : 'Simpan'}
                     </button>
                 </div>
             </div>

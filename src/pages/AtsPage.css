@@ -4,12 +4,14 @@
     background: var(--bg-primary);
 }
 
+/* ── Header ── */
 .ats-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .ats-header h1 {
@@ -19,17 +21,25 @@
 }
 
 .ats-header p {
-    margin: 0.5rem 0 0;
+    margin: 0.35rem 0 0;
     color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-/* Tabs */
+.ats-header-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* ── Tabs ── */
 .ats-tabs {
     display: flex;
     gap: 0;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
 }
+
 .ats-tab {
     display: flex;
     align-items: center;
@@ -40,76 +50,182 @@
     color: var(--text-muted);
     font-size: 0.875rem;
     font-weight: 500;
+    font-family: inherit;
     cursor: pointer;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
-    transition: all 150ms;
+    transition: color var(--transition-fast);
 }
-.ats-tab .material-icons { font-size: 1rem !important; }
+
+.ats-tab .material-icons { font-size: 1rem !important; line-height: 1 !important; }
 .ats-tab:hover { color: var(--text-primary); }
 .ats-tab--active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
 
-/* Toolbar */
+/* ── Toolbar ── */
 .ats-toolbar {
     display: flex;
     gap: 0.75rem;
     margin-bottom: 1.25rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-.ats-toolbar input {
+/* ── Search ── */
+.ats-search {
+    position: relative;
     flex: 1;
-    max-width: 460px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 0.72rem 1rem;
-    background: var(--bg-input);
-    color: var(--text-primary);
-    font-size: 0.9rem;
+    min-width: 200px;
+    max-width: 400px;
 }
 
+.ats-search__icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.1rem !important;
+    line-height: 1 !important;
+    pointer-events: none;
+}
+
+.ats-search__input {
+    width: 100%;
+    padding: 0.65rem 0.85rem 0.65rem 2.5rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: inherit;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ats-search__input::placeholder { color: var(--text-muted); }
+
+.ats-search__input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-10);
+}
+
+/* ── Toolbar select ── */
 .ats-toolbar-select {
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 0.72rem 1rem;
+    border-radius: var(--radius-md);
+    padding: 0.65rem 0.85rem;
     background: var(--bg-input);
     color: var(--text-primary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    font-family: inherit;
     cursor: pointer;
+    transition: border-color var(--transition-fast);
 }
 
-/* State messages */
+.ats-toolbar-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-10);
+}
+
+/* ── Error banner ── */
 .ats-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     background: var(--color-red-10);
-    border: 1px solid var(--color-red);
-    border-radius: 10px;
-    padding: 0.8rem 1rem;
+    border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
     margin-bottom: 1rem;
     color: var(--color-red);
     font-size: 0.875rem;
 }
 
+.ats-error .material-icons { font-size: 1rem !important; line-height: 1 !important; flex-shrink: 0; }
+
+/* ── Loading ── */
 .ats-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
     padding: 3rem;
-    text-align: center;
     color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
+@keyframes ats-spin {
+    to { transform: rotate(360deg); }
+}
+
+.ats-spin {
+    animation: ats-spin 0.9s linear infinite;
+    font-size: 1.1rem !important;
+    line-height: 1 !important;
+}
+
+/* ── Footer ── */
 .ats-footer {
     margin-top: 1.25rem;
     color: var(--text-muted);
-    font-size: 0.875rem;
+    font-size: 0.82rem;
 }
 
+.ats-footer p { margin: 0; }
+
+/* ── Access denied ── */
 .ats-access-denied {
     margin: 4rem auto;
-    max-width: 480px;
+    max-width: 420px;
     background: var(--bg-card);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 2rem;
     border: 1px solid var(--border-color);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
 }
 
-.ats-access-denied h1 { color: var(--color-red); margin-bottom: 0.75rem; }
-.ats-access-denied p  { color: var(--text-muted); }
+.ats-access-denied__icon {
+    font-size: 2.5rem !important;
+    line-height: 1 !important;
+    color: var(--text-muted);
+}
+
+.ats-access-denied h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.ats-access-denied p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+    .ats-page { padding: 1rem; }
+
+    .ats-header { flex-direction: column; }
+
+    .ats-header-actions { width: 100%; }
+    .ats-header-actions .ats-btn { flex: 1; justify-content: center; }
+
+    .ats-search { max-width: 100%; }
+    .ats-toolbar { flex-direction: column; }
+    .ats-toolbar-select { width: 100%; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .ats-tab,
+    .ats-search__input,
+    .ats-toolbar-select { transition: none; }
+
+    .ats-spin { animation: none; }
+}

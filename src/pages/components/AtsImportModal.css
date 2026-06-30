@@ -2,14 +2,15 @@
     width: min(100%, 520px);
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg, 0 24px 80px rgba(0, 0, 0, 0.4));
     display: flex;
     flex-direction: column;
     max-height: 90vh;
     overflow: hidden;
 }
 
+/* ── Body ── */
 .ats-import-body {
     padding: 1.5rem;
     overflow-y: auto;
@@ -18,7 +19,7 @@
     gap: 1.25rem;
 }
 
-/* Info box */
+/* ── Info box ── */
 .ats-import-info {
     font-size: 0.875rem;
     color: var(--text-secondary);
@@ -40,10 +41,10 @@
     color: var(--text-primary);
 }
 
-/* Drop zone */
+/* ── Drop zone ── */
 .ats-import-drop {
     border: 2px dashed var(--border-color);
-    border-radius: 14px;
+    border-radius: var(--radius-xl);
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -51,14 +52,16 @@
     gap: 0.5rem;
     cursor: pointer;
     color: var(--text-muted);
-    transition: all 150ms ease;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
     text-align: center;
 }
 
-.ats-import-drop:hover {
+.ats-import-drop:hover,
+.ats-import-drop:focus-visible {
     border-color: var(--color-primary);
     color: var(--color-primary);
     background: var(--color-primary-10);
+    outline: none;
 }
 
 .ats-import-drop--selected {
@@ -78,7 +81,20 @@
     color: var(--text-dim);
 }
 
-/* Result */
+/* ── Drop icon ── */
+.ats-drop-icon {
+    font-size: 1.75rem !important;
+    line-height: 1 !important;
+}
+
+/* ── Stat icon ── */
+.ats-stat-icon {
+    font-size: 1rem !important;
+    line-height: 1 !important;
+    flex-shrink: 0;
+}
+
+/* ── Result ── */
 .ats-import-result {
     display: grid;
     gap: 0.6rem;
@@ -88,29 +104,18 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     padding: 0.65rem 0.9rem;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
 }
 
-.ats-import-stat--ok {
-    background: var(--color-green-10);
-    color: var(--color-green);
-}
-
-.ats-import-stat--gray {
-    background: var(--bg-hover);
-    color: var(--text-muted);
-}
-
-.ats-import-stat--err {
-    background: var(--color-red-10);
-    color: var(--color-red);
-}
+.ats-import-stat--ok   { background: var(--color-green-10); color: var(--color-green); }
+.ats-import-stat--gray { background: var(--bg-hover);       color: var(--text-muted); }
+.ats-import-stat--err  { background: var(--color-red-10);   color: var(--color-red); }
 
 .ats-import-errors {
-    border: 1px solid var(--color-red);
-    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 
@@ -130,21 +135,22 @@
     background: var(--color-red-10);
 }
 
-.ats-import-more {
-    color: var(--text-dim);
-}
+.ats-import-more { color: var(--text-dim); }
 
-/* Error banner */
+/* ── Error banner ── */
 .ats-import-err-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     background: var(--color-red-10);
-    border: 1px solid var(--color-red);
-    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
+    border-radius: var(--radius-md);
     padding: 0.75rem 1rem;
     color: var(--color-red);
     font-size: 0.875rem;
 }
 
-/* Footer */
+/* ── Footer ── */
 .ats-import-footer {
     display: flex;
     justify-content: flex-end;
@@ -152,4 +158,9 @@
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--border-color);
     flex-shrink: 0;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .ats-import-drop { transition: none; }
 }

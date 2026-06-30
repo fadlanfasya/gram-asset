@@ -12,7 +12,7 @@
 .ats-dash-stat {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 14px;
+    border-radius: var(--radius-xl);
     padding: 1.1rem 1.25rem;
     text-align: center;
 }
@@ -40,7 +40,7 @@
 .ats-dash-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     overflow: hidden;
 }
 .ats-dash-card__head {
@@ -93,8 +93,9 @@
 }
 .ats-dash-bar {
     height: 100%;
-    border-radius: 999px;
-    transition: width 0.5s ease;
+    width: 100%;
+    transform-origin: left center;
+    transition: transform 0.5s ease;
 }
 
 /* ── Group list ─────────────────────────────────────────────────────────── */
@@ -167,6 +168,22 @@
     white-space: nowrap;
 }
 
+/* ── Card head modifiers ────────────────────────────────────────────────── */
+.ats-dash-card__head--amber { color: var(--color-amber); }
+.ats-dash-card__head--red   { color: var(--color-red); }
+
+.ats-dash-head-icon {
+    font-size: 1rem !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+    margin-right: 0.35rem;
+}
+
 /* ── Expired banner ─────────────────────────────────────────────────────── */
-.ats-dash-expired-banner { border-color: var(--color-red); }
-.ats-dash-expired-banner .ats-dash-card__head { border-color: var(--color-red-10); background: var(--color-red-10); }
+.ats-dash-expired-banner { border-color: color-mix(in srgb, var(--color-red) 30%, transparent); }
+.ats-dash-expired-banner .ats-dash-card__head { background: var(--color-red-10); border-color: color-mix(in srgb, var(--color-red) 20%, transparent); }
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .ats-dash-bar { transition: none; }
+}

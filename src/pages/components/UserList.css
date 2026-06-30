@@ -1,191 +1,199 @@
-.user-list {
-    background-color: white;
-    border-radius: 8px;
+/* ── Table container ── */
+.ul-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.table-responsive {
-    overflow-x: auto;
-}
+.ul-table-scroll { overflow-x: auto; }
 
-.users-table {
+/* ── Table ── */
+.ul-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
 }
 
-.users-table thead {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #ddd;
-}
-
-.users-table th {
-    padding: 1rem;
+.ul-table th {
+    padding: 0.55rem 1.25rem;
     text-align: left;
+    font-size: 0.7rem;
     font-weight: 600;
-    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    background: var(--bg-table-header);
     white-space: nowrap;
 }
 
-.users-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
-    color: #666;
+.ul-table td {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    vertical-align: middle;
 }
 
-.users-table tbody tr {
-    transition: background-color 0.2s;
-}
+.ul-row { transition: background 120ms; }
+.ul-row:hover { background: var(--bg-hover); }
+.ul-row--self { background: var(--color-primary-10); }
+.ul-row--self:hover { background: var(--color-primary-10); }
 
-.users-table tbody tr:hover {
-    background-color: #f9f9f9;
-}
-
-.users-table tbody tr.current-user {
-    background-color: #e3f2fd;
-}
-
-.user-name {
+/* ── User cell ── */
+.ul-user {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.7rem;
 }
 
-.user-avatar {
-    width: 36px;
-    height: 36px;
+.ul-avatar {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--color-primary-20);
+    color: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 700;
     flex-shrink: 0;
+    letter-spacing: 0.02em;
+    user-select: none;
 }
 
-.role-select {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: white;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: border-color 0.2s;
-}
+.ul-user-info { display: flex; flex-direction: column; gap: 0.15rem; }
 
-.role-select:focus {
-    outline: none;
-    border-color: #0066cc;
-    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
-}
-
-.role-select:disabled {
-    background-color: #f5f5f5;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.status {
-    display: inline-block;
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
+.ul-user-name {
     font-weight: 500;
-}
-
-.status.active {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.status.inactive {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-.created-date {
-    color: #999;
-    font-size: 0.9rem;
-}
-
-.actions {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.btn-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 4px;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
+    gap: 0.4rem;
+    white-space: nowrap;
 }
 
-.btn-edit {
-    color: #0066cc;
+.ul-self-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.1rem 0.4rem;
+    border-radius: var(--radius-full);
+    background: var(--color-primary-10);
+    color: var(--color-primary);
 }
 
-.btn-edit:hover {
-    background-color: #e3f2fd;
+/* ── Email & date cells ── */
+.ul-email { color: var(--text-muted); }
+.ul-date  { color: var(--text-muted); font-size: 0.82rem; white-space: nowrap; }
+
+/* ── Role select ── */
+.ul-role-select {
+    padding: 0.35rem 0.7rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
 }
 
-.btn-delete {
-    color: #d32f2f;
+.ul-role-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-10);
 }
 
-.btn-delete:hover:not(:disabled) {
-    background-color: #ffebee;
-}
-
-.btn-delete:disabled {
+.ul-role-select:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .users-table th,
-    .users-table td {
-        padding: 0.75rem;
-    }
-
-    .users-table {
-        font-size: 0.9rem;
-    }
+/* ── Action buttons ── */
+.ul-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
+.ul-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-family: inherit;
+    font-weight: 600;
+    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    min-height: 32px;
+}
+
+.ul-btn .material-icons { font-size: 1rem !important; line-height: 1 !important; }
+
+.ul-btn--edit { color: var(--color-primary); }
+
+.ul-btn--edit:hover {
+    background: var(--color-primary-10);
+    border-color: var(--color-primary-20);
+}
+
+.ul-btn--delete { color: var(--text-muted); }
+
+.ul-btn--delete:hover:not(:disabled) {
+    color: var(--color-red);
+    background: var(--color-red-10);
+    border-color: color-mix(in srgb, var(--color-red) 25%, transparent);
+}
+
+.ul-btn--delete:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.ul-btn--confirm {
+    color: var(--color-red);
+    background: var(--color-red-10);
+    border-color: color-mix(in srgb, var(--color-red) 30%, transparent);
+    padding: 0.3rem 0.65rem;
+}
+
+.ul-btn--confirm:hover {
+    background: var(--color-red);
+    color: #fff;
+}
+
+.ul-confirm-label { font-size: 0.75rem; }
+
+/* ── Screen reader only ── */
+.ul-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
-    .users-table {
-        font-size: 0.85rem;
-    }
+    .ul-table th,
+    .ul-table td { padding: 0.6rem 0.85rem; }
 
-    .users-table th,
-    .users-table td {
-        padding: 0.5rem;
-    }
+    .ul-email { display: none; }
+}
 
-    .user-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 0.8rem;
-    }
-
-    .user-name {
-        gap: 0.5rem;
-    }
-
-    .user-name span {
-        display: none;
-    }
-
-    .actions {
-        flex-direction: column;
-    }
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .ul-row,
+    .ul-btn,
+    .ul-role-select { transition: none; }
 }

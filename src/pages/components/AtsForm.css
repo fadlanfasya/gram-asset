@@ -1,3 +1,4 @@
+/* ── Overlay ── */
 .ats-form-overlay {
     position: fixed;
     inset: 0;
@@ -6,83 +7,99 @@
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
-    z-index: 1200;
+    z-index: 50;
+    backdrop-filter: blur(2px);
 }
 
+/* ── Card ── */
 .ats-form-card {
     width: min(100%, 600px);
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg, 0 24px 80px rgba(0, 0, 0, 0.4));
     display: flex;
     flex-direction: column;
     max-height: 90vh;
     overflow: hidden;
 }
 
+/* ── Header ── */
 .ats-form-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.5rem;
     border-bottom: 1px solid var(--border-color);
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg-card);
+    z-index: 1;
 }
 
 .ats-form-header h2 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
+/* ── Close button ── */
 .ats-close-btn {
-    background: transparent;
+    background: none;
     border: none;
     cursor: pointer;
     color: var(--text-muted);
     display: flex;
     align-items: center;
-    padding: 0.25rem;
-    border-radius: 8px;
-    transition: color 150ms ease;
+    padding: 0.2rem;
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast), background var(--transition-fast);
 }
 
-.ats-close-btn:hover {
-    color: var(--text-primary);
-}
+.ats-close-btn:hover { color: var(--text-primary); background: var(--bg-hover); }
+.ats-close-btn .material-icons { font-size: 1.25rem !important; line-height: 1 !important; }
 
+/* ── Body ── */
 .ats-form-body {
     overflow-y: auto;
     flex: 1;
 }
 
+/* ── Form layout ── */
 .ats-form {
     padding: 1.5rem;
     display: grid;
     gap: 1.1rem;
 }
 
-/* Field */
+/* ── Field ── */
 .ats-field {
     display: grid;
     gap: 0.4rem;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.82rem;
+    font-weight: 600;
     color: var(--text-secondary);
+}
+
+.ats-required {
+    color: var(--color-red);
+    font-weight: 400;
 }
 
 .ats-field input,
 .ats-field select,
 .ats-field textarea {
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-md);
+    padding: 0.65rem 0.9rem;
     background: var(--bg-input);
     color: var(--text-primary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-family: inherit;
-    transition: border-color 150ms ease;
+    font-weight: 400;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     width: 100%;
 }
 
@@ -91,14 +108,18 @@
 .ats-field textarea:focus {
     outline: none;
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-10);
 }
+
+.ats-field input::placeholder,
+.ats-field textarea::placeholder { color: var(--text-muted); font-weight: 400; }
 
 .ats-field textarea {
     resize: vertical;
     min-height: 70px;
 }
 
-/* Checkbox field */
+/* ── Checkbox field ── */
 .ats-field--check {
     flex-direction: row;
     align-items: center;
@@ -115,7 +136,7 @@
     flex-shrink: 0;
 }
 
-/* Row layout */
+/* ── Row layout ── */
 .ats-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -123,39 +144,64 @@
     align-items: start;
 }
 
-/* Hint text */
+/* ── Hint callout ── */
 .ats-form-hint {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
     font-size: 0.8rem;
-    color: var(--text-dim);
-    background: var(--bg-hover);
-    border-radius: 8px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    background: var(--color-primary-10);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+    border-radius: var(--radius-md);
     padding: 0.65rem 0.85rem;
-    border-left: 3px solid var(--color-primary-50);
+    margin: 0;
+    line-height: 1.5;
 }
 
+.ats-form-hint-icon {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+/* ── Validation error ── */
 .ats-error-text {
     color: var(--color-red);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 400;
 }
 
-/* Actions */
+/* ── Actions ── */
 .ats-form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 0.65rem;
     padding-top: 0.25rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 0.25rem;
 }
 
+/* ── Buttons ── */
 .ats-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     border: none;
-    border-radius: 10px;
-    padding: 0.75rem 1.3rem;
+    border-radius: var(--radius-md);
+    padding: 0.65rem 1.3rem;
     cursor: pointer;
     font-weight: 600;
     font-size: 0.875rem;
-    transition: all 150ms ease;
+    font-family: inherit;
+    transition: background var(--transition-fast), color var(--transition-fast);
 }
+
+.ats-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.ats-btn .material-icons { font-size: 1rem !important; line-height: 1 !important; }
 
 .ats-btn--secondary {
     background: var(--bg-hover);
@@ -163,25 +209,42 @@
     border: 1px solid var(--border-color);
 }
 
-.ats-btn--secondary:hover {
-    background: var(--border-color);
-}
+.ats-btn--secondary:hover:not(:disabled) { background: var(--border-color); }
 
 .ats-btn--primary {
     background: var(--color-primary);
-    color: white;
+    color: #fff;
 }
 
-.ats-btn--primary:hover {
-    background: var(--color-primary-hover);
+.ats-btn--primary:hover:not(:disabled) { background: var(--color-primary-hover); }
+
+/* ── Mobile (bottom sheet) ── */
+@media (max-width: 600px) {
+    .ats-form-overlay {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .ats-form-card {
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        max-height: 92vh;
+    }
+
+    .ats-form-row { grid-template-columns: 1fr; }
+    .ats-field--check { padding-top: 0; }
+    .ats-form-actions { flex-direction: column-reverse; }
+    .ats-btn { justify-content: center; }
 }
 
-@media (max-width: 480px) {
-    .ats-form-row {
-        grid-template-columns: 1fr;
-    }
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .ats-close-btn,
+    .ats-btn,
+    .ats-field input,
+    .ats-field select,
+    .ats-field textarea { transition: none; }
 
-    .ats-field--check {
-        padding-top: 0;
-    }
+    .ats-form-overlay { backdrop-filter: none; }
 }

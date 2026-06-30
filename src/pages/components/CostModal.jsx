@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
-import { X, Trash2, Plus } from 'lucide-react'
 import { costsApi } from '../../utils/atsApi'
 import './CostModal.css'
 
 export default function CostModal({ resource, onClose, onRefresh }) {
-    const [costs, setCosts] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [newYear, setNewYear] = useState(new Date().getFullYear())
+    const [costs, setCosts]       = useState([])
+    const [loading, setLoading]   = useState(true)
+    const [newYear, setNewYear]   = useState(new Date().getFullYear())
     const [newAmount, setNewAmount] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError]       = useState('')
 
     useEffect(() => { load() }, [resource.id])
 
@@ -26,7 +25,7 @@ export default function CostModal({ resource, onClose, onRefresh }) {
 
     const handleAdd = async (e) => {
         e.preventDefault()
-        if (!newAmount) return setError('Amount is required')
+        if (!newAmount) return setError('Jumlah wajib diisi.')
         try {
             setError('')
             await costsApi.add(resource.id, { year: Number(newYear), amount: Number(newAmount) })
@@ -53,38 +52,55 @@ export default function CostModal({ resource, onClose, onRefresh }) {
 
     return (
         <div className="ats-form-overlay" onClick={onClose}>
-            <div className="cost-modal" onClick={(e) => e.stopPropagation()}>
+            <div
+                className="cost-modal"
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="cost-modal-title"
+            >
                 <div className="ats-form-header">
                     <div>
-                        <h2>Cost Management</h2>
-                        <p className="cost-modal-resource">{resource.name}</p>
+                        <h2 id="cost-modal-title">Kelola Biaya</h2>
+                        <p className="cost-modal-resource">{resource.name.split('\n')[0]}</p>
                     </div>
-                    <button className="ats-close-btn" onClick={onClose}><X size={22} /></button>
+                    <button className="ats-close-btn" onClick={onClose} aria-label="Tutup">
+                        <span className="material-icons" aria-hidden="true">close</span>
+                    </button>
                 </div>
 
-                {error && <div className="cost-modal-error">{error}</div>}
+                {error && (
+                    <div className="cost-modal-error" role="alert">
+                        <span className="material-icons" aria-hidden="true">error</span>
+                        {error}
+                    </div>
+                )}
 
                 <div className="cost-modal-body">
                     <table className="cost-table">
                         <thead>
                             <tr>
-                                <th>Year</th>
-                                <th>Amount (IDR)</th>
-                                <th></th>
+                                <th scope="col">Tahun</th>
+                                <th scope="col">Jumlah (IDR)</th>
+                                <th scope="col"><span className="cost-sr-only">Hapus</span></th>
                             </tr>
                         </thead>
                         <tbody>
                             {loading ? (
-                                <tr><td colSpan="3" className="cost-empty">Loading...</td></tr>
+                                <tr><td colSpan="3" className="cost-empty">Memuat…</td></tr>
                             ) : costs.length === 0 ? (
-                                <tr><td colSpan="3" className="cost-empty">No costs recorded yet.</td></tr>
+                                <tr><td colSpan="3" className="cost-empty">Belum ada data biaya.</td></tr>
                             ) : costs.map((c) => (
                                 <tr key={c.id}>
                                     <td className="cost-year">{c.year}</td>
                                     <td className="cost-amount">{Number(c.amount).toLocaleString('id-ID')}</td>
                                     <td>
-                                        <button className="ats-action-btn ats-action-btn--danger" onClick={() => handleDelete(c.id)}>
-                                            <Trash2 size={14} />
+                                        <button
+                                            className="ats-action-btn ats-action-btn--danger"
+                                            onClick={() => handleDelete(c.id)}
+                                            aria-label={`Hapus biaya ${c.year}`}
+                                        >
+                                            <span className="material-icons" aria-hidden="true">delete</span>
                                         </button>
                                     </td>
                                 </tr>
@@ -102,10 +118,10 @@ export default function CostModal({ resource, onClose, onRefresh }) {
                     </table>
 
                     <form className="cost-add-form" onSubmit={handleAdd}>
-                        <h3>Add Cost Entry</h3>
+                        <h3>Tambah Entri Biaya</h3>
                         <div className="cost-add-row">
                             <label>
-                                Year
+                                Tahun
                                 <input
                                     type="number"
                                     value={newYear}
@@ -115,7 +131,7 @@ export default function CostModal({ resource, onClose, onRefresh }) {
                                 />
                             </label>
                             <label>
-                                Amount (IDR)
+                                Jumlah (IDR)
                                 <input
                                     type="number"
                                     value={newAmount}
@@ -125,7 +141,8 @@ export default function CostModal({ resource, onClose, onRefresh }) {
                                 />
                             </label>
                             <button type="submit" className="ats-btn ats-btn--primary cost-add-btn">
-                                <Plus size={15} /> Add
+                                <span className="material-icons" aria-hidden="true">add</span>
+                                Tambah
                             </button>
                         </div>
                     </form>

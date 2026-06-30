@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import useDefinitionStore from '../stores/useDefinitionStore'
 import './CreateDefinitionPage.css'
@@ -40,21 +40,26 @@ export default function CreateDefinitionPage() {
     const addDefinition = useDefinitionStore((s) => s.addDefinition)
     const updateDefinition = useDefinitionStore((s) => s.updateDefinition)
     const getDefinition = useDefinitionStore((s) => s.getDefinition)
+    const definitions = useDefinitionStore((s) => s.definitions)
 
     const isEdit = Boolean(id)
     const existing = isEdit ? getDefinition(id) : null
 
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+    const [category, setCategory] = useState('hardware')
     const [icon, setIcon] = useState('computer')
     const [color, setColor] = useState('#3c83f6')
     const [fields, setFields] = useState([emptyField()])
     const [hasChanges, setHasChanges] = useState(false)
+    const initialized = useRef(false)
 
     useEffect(() => {
-        if (existing) {
+        if (existing && !initialized.current) {
+            initialized.current = true
             setName(existing.name)
             setDescription(existing.description)
+            setCategory(existing.category || 'hardware')
             setIcon(existing.icon)
             setColor(existing.color)
             setFields(existing.fields.length > 0 ? existing.fields : [emptyField()])
@@ -91,6 +96,7 @@ export default function CreateDefinitionPage() {
         const defData = {
             name: name.trim(),
             description: description.trim(),
+            category,
             icon,
             color,
             fields: validFields,
@@ -156,6 +162,19 @@ export default function CreateDefinitionPage() {
                         value={description}
                         onChange={(e) => { setDescription(e.target.value); markChanged() }}
                     ></textarea>
+                </div>
+
+                <div className="create-def__field-group">
+                    <label className="create-def__label">Asset Group</label>
+                    <select
+                        className="create-def__input"
+                        value={category}
+                        onChange={(e) => { setCategory(e.target.value); markChanged() }}
+                    >
+                        <option value="vm">VM</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="software">Software</option>
+                    </select>
                 </div>
             </div>
 

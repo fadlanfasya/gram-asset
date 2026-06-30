@@ -3,11 +3,12 @@
     overflow-x: auto;
 }
 
+/* ── Table ── */
 .ats-table {
     width: 100%;
     border-collapse: collapse;
     background: var(--bg-card);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     overflow: hidden;
     border: 1px solid var(--border-color);
 }
@@ -27,15 +28,11 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     font-weight: 600;
+    white-space: nowrap;
 }
 
-.ats-table tbody tr:hover {
-    background: var(--bg-hover);
-}
-
-.ats-table tbody tr:last-child td {
-    border-bottom: none;
-}
+.ats-table tbody tr:hover { background: var(--bg-hover); }
+.ats-table tbody tr:last-child td { border-bottom: none; }
 
 .ats-empty {
     padding: 3rem;
@@ -48,10 +45,8 @@
     font-size: 0.85rem;
 }
 
-/* Name */
-.ats-name-cell {
-    max-width: 240px;
-}
+/* ── Name cell ── */
+.ats-name-cell { max-width: 240px; }
 
 .ats-name-wrap {
     display: flex;
@@ -79,7 +74,7 @@
     font-style: italic;
 }
 
-/* Description */
+/* ── Description cell ── */
 .ats-desc-cell {
     font-size: 0.82rem;
     color: var(--text-muted);
@@ -89,7 +84,7 @@
     white-space: nowrap;
 }
 
-/* Badges */
+/* ── Badges ── */
 .ats-badge {
     display: inline-block;
     padding: 0.22rem 0.6rem;
@@ -99,12 +94,12 @@
     white-space: nowrap;
 }
 
-.badge--green   { background: var(--color-green-10);  color: var(--color-green); }
-.badge--amber   { background: var(--color-amber-10);  color: var(--color-amber); }
-.badge--gray    { background: var(--border-color);    color: var(--text-muted); }
-.badge--red     { background: var(--color-red-10);    color: var(--color-red); }
+.badge--green { background: var(--color-green-10); color: var(--color-green); }
+.badge--amber { background: var(--color-amber-10); color: var(--color-amber); }
+.badge--gray  { background: var(--border-color);   color: var(--text-muted); }
+.badge--red   { background: var(--color-red-10);   color: var(--color-red); }
 
-/* Period */
+/* ── Period ── */
 .ats-period {
     display: flex;
     flex-direction: column;
@@ -118,7 +113,7 @@
 .ats-period--expired { color: var(--color-red) !important; }
 .ats-period--soon    { color: var(--color-amber) !important; }
 
-/* Cost chips */
+/* ── Cost chips ── */
 .ats-cost-chips {
     display: flex;
     flex-direction: column;
@@ -128,14 +123,14 @@
 .ats-cost-chip {
     display: inline-block;
     padding: 0.18rem 0.5rem;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-size: 0.72rem;
     background: var(--color-green-10);
     color: var(--color-green);
     white-space: nowrap;
 }
 
-/* Asset chips */
+/* ── Asset chips ── */
 .ats-asset-chips {
     display: flex;
     flex-wrap: wrap;
@@ -157,7 +152,7 @@
     color: var(--text-muted);
 }
 
-/* Actions */
+/* ── Actions ── */
 .ats-actions {
     display: flex;
     gap: 0.35rem;
@@ -167,16 +162,42 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    background: var(--bg-hover);
+    border: 1px solid transparent;
+    background: none;
     color: var(--text-muted);
-    border-radius: 8px;
-    padding: 0.4rem;
+    border-radius: var(--radius-sm);
+    padding: 0.35rem;
     cursor: pointer;
-    transition: all 150ms ease;
+    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    min-width: 30px;
+    min-height: 30px;
 }
 
-.ats-action-btn:hover         { background: var(--color-primary-10);  color: var(--color-primary); }
-.ats-action-btn--cost:hover   { background: var(--color-green-10);    color: var(--color-green); }
-.ats-action-btn--asset:hover  { background: var(--color-purple-10);   color: var(--color-purple); }
-.ats-action-btn--danger:hover { background: var(--color-red-10);      color: var(--color-red); }
+.ats-action-btn .material-icons { font-size: 1rem !important; line-height: 1 !important; }
+
+.ats-action-btn:hover          { background: var(--color-primary-10); color: var(--color-primary); }
+.ats-action-btn--cost:hover    { background: var(--color-green-10);   color: var(--color-green); }
+.ats-action-btn--asset:hover   { background: var(--color-primary-10); color: var(--color-primary); }
+.ats-action-btn--danger:hover  { background: var(--color-red-10);     color: var(--color-red); }
+
+.ats-action-btn--confirm {
+    color: var(--color-amber);
+    background: var(--color-amber-10);
+    border-color: color-mix(in srgb, var(--color-amber) 30%, transparent);
+}
+
+.ats-action-btn--confirm:hover {
+    background: var(--color-amber);
+    color: #fff;
+    border-color: transparent;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .ats-desc-cell { display: none; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .ats-action-btn { transition: none; }
+}

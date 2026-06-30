@@ -92,16 +92,6 @@ export default function Sidebar() {
                 </button>
             </nav>
 
-            {/* System Status */}
-            <div className="sidebar__footer">
-                <div className="sidebar__status-card">
-                    <p className="sidebar__status-label">System Status</p>
-                    <div className="sidebar__status-row">
-                        <span className="sidebar__status-dot"></span>
-                        <span className="sidebar__status-text">All services operational</span>
-                    </div>
-                </div>
-            </div>
         </aside>
     )
 }

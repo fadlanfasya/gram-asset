@@ -61,7 +61,7 @@ export default function AssetDetailPage() {
                 <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>GRAM</span>
                 <span className="detail-breadcrumb__sep">|</span>
                 <Link to="/assets">Assets</Link>
-                <span className="detail-breadcrumb__icon">chevron_right</span>
+                <span className="material-icons detail-breadcrumb__icon">chevron_right</span>
                 <span className="detail-breadcrumb__current">{asset.name}</span>
             </nav>
 
@@ -81,6 +81,12 @@ export default function AssetDetailPage() {
                 </div>
 
                 <div className="detail-header__actions">
+                    {/* Back */}
+                    <button className="detail-btn detail-btn--secondary" onClick={() => navigate('/assets')}>
+                        <span className="material-icons">arrow_back</span>
+                        Back to Assets
+                    </button>
+
                     {/* Delete */}
                     <button className="detail-btn detail-btn--secondary" onClick={handleDelete}>
                         <span className="material-icons">delete_outline</span>

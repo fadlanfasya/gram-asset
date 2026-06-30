@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import useAuthStore from './useAuthStore'
 
-const API_URL = 'http://localhost:4000/api/assets'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_URL = `${API_BASE_URL}/assets`
 
 const getHeaders = () => {
     const token = useAuthStore.getState().token
@@ -13,8 +14,10 @@ const getHeaders = () => {
 
 const useAssetStore = create((set, get) => ({
     assets: [],
+    loading: true,
 
     fetchAssets: async () => {
+        set({ loading: true })
         try {
             const token = useAuthStore.getState().token
             const res = await fetch(API_URL, {
@@ -26,6 +29,8 @@ const useAssetStore = create((set, get) => ({
             }
         } catch (error) {
             console.error('Failed to fetch assets:', error)
+        } finally {
+            set({ loading: false })
         }
     },
 

@@ -10,18 +10,18 @@ import AtsDashboard from './components/AtsDashboard'
 import './AtsPage.css'
 
 export default function AtsPage() {
-    const user = useAuthStore((s) => s.user)
+    const user   = useAuthStore((s) => s.user)
     const assets = useAssetStore((s) => s.assets)
 
-    const [resources, setResources] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState('')
-    const [activeTab, setActiveTab] = useState('dashboard')
-    const [showForm, setShowForm] = useState(false)
-    const [showImport, setShowImport] = useState(false)
+    const [resources, setResources]           = useState([])
+    const [loading, setLoading]               = useState(true)
+    const [error, setError]                   = useState('')
+    const [activeTab, setActiveTab]           = useState('dashboard')
+    const [showForm, setShowForm]             = useState(false)
+    const [showImport, setShowImport]         = useState(false)
     const [editingResource, setEditingResource] = useState(null)
-    const [search, setSearch] = useState('')
-    const [groupFilter, setGroupFilter] = useState('')
+    const [search, setSearch]                 = useState('')
+    const [groupFilter, setGroupFilter]       = useState('')
 
     const isAdmin = canManageAts(user?.role)
 
@@ -34,16 +34,16 @@ export default function AtsPage() {
             const data = await resourcesApi.getAll()
             setResources(data.resources || [])
         } catch (err) {
-            setError(err.message || 'Failed to load ATS data')
+            setError(err.message || 'Gagal memuat data ATS.')
         } finally {
             setLoading(false)
         }
     }
 
     const filtered = resources.filter((r) => {
-        const q = search.toLowerCase().trim()
+        const q           = search.toLowerCase().trim()
         const matchSearch = !q || r.name.toLowerCase().includes(q) || r.description?.toLowerCase().includes(q)
-        const matchGroup = !groupFilter || r.atsGroup === groupFilter
+        const matchGroup  = !groupFilter || r.atsGroup === groupFilter
         return matchSearch && matchGroup
     })
 
@@ -59,18 +59,17 @@ export default function AtsPage() {
             setEditingResource(null)
             await fetchResources()
         } catch (err) {
-            setError(err.message || 'Failed to save')
+            setError(err.message || 'Gagal menyimpan data ATS.')
         }
     }
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete this ATS record? All costs will also be removed.')) return
         try {
             setError('')
             await resourcesApi.remove(id)
             setResources((prev) => prev.filter((r) => r.id !== id))
         } catch (err) {
-            setError(err.message || 'Failed to delete')
+            setError(err.message || 'Gagal menghapus data ATS.')
         }
     }
 
@@ -78,8 +77,9 @@ export default function AtsPage() {
         return (
             <div className="ats-page">
                 <div className="ats-access-denied">
-                    <h1>Access Denied</h1>
-                    <p>Only administrators can manage ATS records.</p>
+                    <span className="material-icons ats-access-denied__icon" aria-hidden="true">lock</span>
+                    <h1>Akses Ditolak</h1>
+                    <p>Hanya administrator yang dapat mengakses halaman ini.</p>
                 </div>
             </div>
         )
@@ -87,70 +87,89 @@ export default function AtsPage() {
 
     return (
         <div className="ats-page">
+
+            {/* ── Header ── */}
             <div className="ats-header">
                 <div>
-                    <h1>ATS Management</h1>
-                    <p>Annual Technical Support contracts for infrastructure resources.</p>
+                    <h1>Manajemen ATS</h1>
+                    <p>Kontrak Annual Technical Support untuk sumber daya infrastruktur.</p>
                 </div>
                 {activeTab === 'resources' && (
-                    <div style={{ display: 'flex', gap: '0.75rem' }}>
-                        <button className="btn-secondary" onClick={() => setShowImport(true)}>
-                            <span className="material-icons">upload_file</span>
+                    <div className="ats-header-actions">
+                        <button className="ats-btn ats-btn--secondary" onClick={() => setShowImport(true)}>
+                            <span className="material-icons" aria-hidden="true">upload_file</span>
                             Import CSV
                         </button>
-                        <button className="btn-primary" onClick={() => { setEditingResource(null); setShowForm(true) }}>
-                            <span className="material-icons">add_circle</span>
-                            Add ATS
+                        <button className="ats-btn ats-btn--primary" onClick={() => { setEditingResource(null); setShowForm(true) }}>
+                            <span className="material-icons" aria-hidden="true">add_circle</span>
+                            Tambah ATS
                         </button>
                     </div>
                 )}
             </div>
 
-            {/* ── Tab switcher ── */}
+            {/* ── Tabs ── */}
             <div className="ats-tabs">
                 <button
                     className={`ats-tab${activeTab === 'dashboard' ? ' ats-tab--active' : ''}`}
                     onClick={() => setActiveTab('dashboard')}
                 >
-                    <span className="material-icons">dashboard</span>
+                    <span className="material-icons" aria-hidden="true">dashboard</span>
                     Dashboard
                 </button>
                 <button
                     className={`ats-tab${activeTab === 'resources' ? ' ats-tab--active' : ''}`}
                     onClick={() => setActiveTab('resources')}
                 >
-                    <span className="material-icons">list_alt</span>
-                    Resources
+                    <span className="material-icons" aria-hidden="true">list_alt</span>
+                    Sumber Daya
                 </button>
             </div>
 
-            {error && <div className="ats-error">{error}</div>}
+            {/* ── Error ── */}
+            {error && (
+                <div className="ats-error" role="alert">
+                    <span className="material-icons" aria-hidden="true">error</span>
+                    {error}
+                </div>
+            )}
 
+            {/* ── Content ── */}
             {loading ? (
-                <div className="ats-loading">Loading...</div>
+                <div className="ats-loading" aria-live="polite">
+                    <span className="material-icons ats-spin" aria-hidden="true">sync</span>
+                    Memuat data ATS…
+                </div>
             ) : activeTab === 'dashboard' ? (
                 <AtsDashboard resources={resources} />
             ) : (
                 <>
                     <div className="ats-toolbar">
-                        <input
-                            type="search"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Search by name or description..."
-                        />
+                        <div className="ats-search">
+                            <span className="material-icons ats-search__icon" aria-hidden="true">search</span>
+                            <input
+                                type="search"
+                                className="ats-search__input"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                placeholder="Cari nama atau keterangan…"
+                                aria-label="Cari ATS"
+                            />
+                        </div>
                         <select
                             value={groupFilter}
                             onChange={(e) => setGroupFilter(e.target.value)}
                             className="ats-toolbar-select"
+                            aria-label="Filter grup"
                         >
-                            <option value="">All Groups</option>
+                            <option value="">Semua Grup</option>
                             <option value="a">Group A</option>
                             <option value="b">Group B</option>
                             <option value="terpisah">Terpisah</option>
                             <option value="tidak diperpanjang">Tidak Diperpanjang</option>
                         </select>
                     </div>
+
                     <ResourceList
                         items={filtered}
                         assets={assets}
@@ -158,12 +177,14 @@ export default function AtsPage() {
                         onDelete={handleDelete}
                         onRefresh={fetchResources}
                     />
+
                     <div className="ats-footer">
-                        <p>Showing {filtered.length} of {resources.length} records.</p>
+                        <p>Menampilkan {filtered.length} dari {resources.length} data.</p>
                     </div>
                 </>
             )}
 
+            {/* ── Modals ── */}
             {showForm && (
                 <ResourceForm
                     resource={editingResource}
@@ -178,6 +199,7 @@ export default function AtsPage() {
                     onRefresh={fetchResources}
                 />
             )}
+
         </div>
     )
 }

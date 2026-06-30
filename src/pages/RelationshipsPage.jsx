@@ -1,10 +1,11 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
-import { ReactFlow, Controls, Background, MiniMap, useNodesState, useEdgesState, Handle, Position, useReactFlow } from '@xyflow/react'
+import { ReactFlow, Controls, Background, BackgroundVariant, MiniMap, useNodesState, useEdgesState, Handle, Position, useReactFlow } from '@xyflow/react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import '@xyflow/react/dist/style.css'
 import useAssetStore from '../stores/useAssetStore'
 import useDefinitionStore from '../stores/useDefinitionStore'
 import useRelationshipStore from '../stores/useRelationshipStore'
+import useThemeStore from '../stores/useThemeStore'
 import './RelationshipsPage.css'
 
 // Custom Node Component
@@ -23,8 +24,8 @@ const AssetNode = ({ data, selected }) => {
                 ></span>
             </div>
             <div className="asset-node__label">{data.label}</div>
-            <Handle type="target" position={Position.Top} style={{ background: '#555' }} />
-            <Handle type="source" position={Position.Bottom} style={{ background: '#555' }} />
+            <Handle type="target" position={Position.Top} className="asset-handle" />
+            <Handle type="source" position={Position.Bottom} className="asset-handle" />
         </div>
     )
 }
@@ -37,6 +38,8 @@ export default function RelationshipsPage() {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const focusId = searchParams.get('focusId')
+    const theme = useThemeStore((s) => s.theme)
+    const isLight = theme === 'light'
 
     const assets = useAssetStore((s) => s.assets)
     const definitions = useDefinitionStore((s) => s.definitions)
@@ -94,7 +97,7 @@ export default function RelationshipsPage() {
                     label: rel.type,
                     type: 'default',
                     animated: true,
-                    style: { stroke: '#555', strokeWidth: 2 },
+                    style: { stroke: isLight ? '#94a3b8' : '#555', strokeWidth: 2 },
                 })
             }
         })
@@ -307,10 +310,6 @@ export default function RelationshipsPage() {
             <div className="rel-graph-area">
                 {/* Top Bar Overlay */}
                 <div className="rel-top-bar">
-                    <div className="status-pill">
-                        <span className="status-dot"></span>
-                        System Healthy
-                    </div>
                     <button
                         className="add-rel-btn"
                         onClick={() => navigate('/relationships/new')}
@@ -330,7 +329,12 @@ export default function RelationshipsPage() {
                     fitView
                     attributionPosition="bottom-right"
                 >
-                    <Background color="#333" gap={20} />
+                    <Background
+                        variant={BackgroundVariant.Dots}
+                        gap={20}
+                        size={1.2}
+                        color={isLight ? '#94a3b8' : '#444'}
+                    />
                     <Controls />
                     <MiniMap
                         nodeColor={(n) => n.data.color || '#fff'}

@@ -155,6 +155,12 @@ a {
   text-decoration: none;
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
 button {
   cursor: pointer;
   font-family: inherit;
@@ -185,23 +191,6 @@ img {
   backdrop-filter: blur(12px);
   background: var(--bg-card-70);
   border: 1px solid var(--border-subtle);
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-border::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent-cyan));
 }
 
 /* ── Scrollbar ── */

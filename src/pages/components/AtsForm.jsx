@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { X } from 'lucide-react'
 import './AtsForm.css'
 
 const GROUP_OPTIONS = [
@@ -23,12 +22,12 @@ export default function ResourceForm({ resource, onClose, onSubmit }) {
     useEffect(() => {
         if (resource) {
             setForm({
-                name: resource.name || '',
-                description: resource.description || '',
-                atsGroup: resource.atsGroup || '',
+                name:         resource.name || '',
+                description:  resource.description || '',
+                atsGroup:     resource.atsGroup || '',
                 supportStart: resource.supportStart?.split('T')[0] || '',
-                supportEnd: resource.supportEnd?.split('T')[0] || '',
-                needed: resource.needed !== undefined ? resource.needed : true,
+                supportEnd:   resource.supportEnd?.split('T')[0] || '',
+                needed:       resource.needed !== undefined ? resource.needed : true,
             })
         }
     }, [resource])
@@ -40,9 +39,9 @@ export default function ResourceForm({ resource, onClose, onSubmit }) {
 
     const validate = () => {
         const errs = {}
-        if (!form.name.trim()) errs.name = 'Nama ATS wajib diisi'
+        if (!form.name.trim()) errs.name = 'Nama ATS wajib diisi.'
         if (form.supportStart && form.supportEnd && new Date(form.supportEnd) <= new Date(form.supportStart)) {
-            errs.supportEnd = 'Tanggal akhir harus setelah tanggal mulai'
+            errs.supportEnd = 'Tanggal akhir harus setelah tanggal mulai.'
         }
         setErrors(errs)
         return Object.keys(errs).length === 0
@@ -52,40 +51,47 @@ export default function ResourceForm({ resource, onClose, onSubmit }) {
         e.preventDefault()
         if (!validate()) return
         await onSubmit({
-            name: form.name,
-            description: form.description || null,
-            atsGroup: form.atsGroup || null,
+            name:         form.name,
+            description:  form.description || null,
+            atsGroup:     form.atsGroup || null,
             supportStart: form.supportStart || null,
-            supportEnd: form.supportEnd || null,
-            needed: form.needed,
+            supportEnd:   form.supportEnd || null,
+            needed:       form.needed,
         })
     }
 
     return (
         <div className="ats-form-overlay" onClick={onClose}>
-            <div className="ats-form-card" onClick={(e) => e.stopPropagation()}>
+            <div
+                className="ats-form-card"
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="ats-form-title"
+            >
                 <div className="ats-form-header">
-                    <h2>{resource ? 'Edit ATS' : 'Tambah ATS'}</h2>
+                    <h2 id="ats-form-title">{resource ? 'Edit ATS' : 'Tambah ATS'}</h2>
                     <button className="ats-close-btn" onClick={onClose} aria-label="Tutup">
-                        <X size={22} />
+                        <span className="material-icons" aria-hidden="true">close</span>
                     </button>
                 </div>
 
                 <div className="ats-form-body">
-                    <form className="ats-form" onSubmit={handleSubmit}>
+                    <form className="ats-form" onSubmit={handleSubmit} noValidate>
 
                         <label className="ats-field">
-                            Nama ATS *
+                            Nama ATS <span className="ats-required">*</span>
                             <input
                                 value={form.name}
                                 onChange={(e) => set('name', e.target.value)}
                                 placeholder="contoh: RedHat Enterprise Linux"
+                                autoFocus
                             />
-                            {errors.name && <span className="ats-error-text">{errors.name}</span>}
+                            {errors.name && <span className="ats-error-text" role="alert">{errors.name}</span>}
                         </label>
 
                         <label className="ats-field">
-                            Keterangan / Description
+                            Keterangan
                             <textarea
                                 value={form.description}
                                 onChange={(e) => set('description', e.target.value)}
@@ -96,9 +102,9 @@ export default function ResourceForm({ resource, onClose, onSubmit }) {
 
                         <div className="ats-form-row">
                             <label className="ats-field">
-                                ATS Group
+                                Grup ATS
                                 <select value={form.atsGroup} onChange={(e) => set('atsGroup', e.target.value)}>
-                                    <option value="">Pilih group</option>
+                                    <option value="">Pilih grup</option>
                                     {GROUP_OPTIONS.map((g) => (
                                         <option key={g.value} value={g.value}>{g.label}</option>
                                     ))}
@@ -111,7 +117,7 @@ export default function ResourceForm({ resource, onClose, onSubmit }) {
                                     checked={form.needed}
                                     onChange={(e) => set('needed', e.target.checked)}
                                 />
-                                Butuh / Required
+                                Dibutuhkan
                             </label>
                         </div>
 
@@ -131,12 +137,13 @@ export default function ResourceForm({ resource, onClose, onSubmit }) {
                                     value={form.supportEnd}
                                     onChange={(e) => set('supportEnd', e.target.value)}
                                 />
-                                {errors.supportEnd && <span className="ats-error-text">{errors.supportEnd}</span>}
+                                {errors.supportEnd && <span className="ats-error-text" role="alert">{errors.supportEnd}</span>}
                             </label>
                         </div>
 
                         <p className="ats-form-hint">
-                            Setelah menyimpan, kamu bisa menambahkan biaya (cost) dan menghubungkan aset melalui tombol di tabel.
+                            <span className="material-icons ats-form-hint-icon" aria-hidden="true">info</span>
+                            Setelah menyimpan, kamu bisa menambahkan biaya dan menghubungkan aset melalui tombol di tabel.
                         </p>
 
                         <div className="ats-form-actions">

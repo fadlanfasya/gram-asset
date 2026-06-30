@@ -1,0 +1,139 @@
+.bg-section {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.bg-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bg-top h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.bg-new-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+}
+
+.bg-error {
+    margin: 0;
+}
+
+/* Form card */
+.bg-form-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.25rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.bg-fields {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.bg-fields label {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.bg-fields input,
+.bg-fields select {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.65rem 0.85rem;
+    background: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    width: 100%;
+}
+
+.bg-fields input:focus,
+.bg-fields select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.bg-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+}
+
+/* Cards grid */
+.bg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.bg-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: border-color 150ms ease;
+}
+
+.bg-card:hover {
+    border-color: var(--color-primary-50);
+}
+
+.bg-card-info {
+    display: grid;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.bg-card-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.bg-card-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.bg-card-actions {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+.bg-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem;
+    background: var(--bg-card);
+    border-radius: 14px;
+    border: 1px dashed var(--border-color);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+    .bg-fields {
+        grid-template-columns: 1fr;
+    }
+}

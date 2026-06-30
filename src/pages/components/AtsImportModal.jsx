@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { AlertCircle, CheckCircle, FileText, Upload, X } from 'lucide-react'
 import { importApi } from '../../utils/atsApi'
 import './AtsImportModal.css'
 
@@ -38,11 +37,19 @@ export default function AtsImportModal({ onClose, onRefresh }) {
 
     return (
         <div className="ats-form-overlay" onClick={onClose}>
-            <div className="ats-import-modal" onClick={(e) => e.stopPropagation()}>
+            <div
+                className="ats-import-modal"
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="ats-import-title"
+            >
 
                 <div className="ats-form-header">
-                    <h2>Import CSV</h2>
-                    <button className="ats-close-btn" onClick={onClose}><X size={22} /></button>
+                    <h2 id="ats-import-title">Import CSV</h2>
+                    <button className="ats-close-btn" onClick={onClose} aria-label="Tutup">
+                        <span className="material-icons" aria-hidden="true">close</span>
+                    </button>
                 </div>
 
                 <div className="ats-import-body">
@@ -53,7 +60,7 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                                 <ul>
                                     <li><strong>Nama Aplikasi (ATS)</strong> → Nama ATS</li>
                                     <li><strong>Penjelasan</strong> → Keterangan</li>
-                                    <li><strong>ATS 2025</strong> → Group (a / b / terpisah)</li>
+                                    <li><strong>ATS 2025</strong> → Grup (a / b / terpisah)</li>
                                     <li><strong>Masa ATS</strong> → Periode support</li>
                                     <li><strong>Butuh</strong> → hanya baris TRUE yang diimport</li>
                                     <li><strong>Harga Per Item (2024/2025/2026)</strong> → Biaya</li>
@@ -65,8 +72,12 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                                 onClick={() => inputRef.current?.click()}
                                 onDrop={handleDrop}
                                 onDragOver={(e) => e.preventDefault()}
+                                role="button"
+                                tabIndex={0}
+                                aria-label="Klik atau drag file CSV ke sini"
+                                onKeyDown={(e) => e.key === 'Enter' && inputRef.current?.click()}
                             >
-                                <FileText size={28} />
+                                <span className="material-icons ats-drop-icon" aria-hidden="true">description</span>
                                 <p>{file ? file.name : 'Klik atau drag & drop file CSV'}</p>
                                 {file && <span className="ats-import-size">{(file.size / 1024).toFixed(1)} KB</span>}
                                 <input
@@ -75,6 +86,7 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                                     accept=".csv"
                                     onChange={handleFile}
                                     style={{ display: 'none' }}
+                                    aria-hidden="true"
                                 />
                             </div>
                         </>
@@ -83,7 +95,7 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                     {result && (
                         <div className="ats-import-result">
                             <div className="ats-import-stat ats-import-stat--ok">
-                                <CheckCircle size={18} />
+                                <span className="material-icons ats-stat-icon" aria-hidden="true">check_circle</span>
                                 <span><strong>{result.imported}</strong> ATS berhasil diimport</span>
                             </div>
                             {result.merged > 0 && (
@@ -97,7 +109,7 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                             {result.errors?.length > 0 && (
                                 <div className="ats-import-errors">
                                     <p className="ats-import-stat ats-import-stat--err">
-                                        <AlertCircle size={15} />
+                                        <span className="material-icons ats-stat-icon" aria-hidden="true">error</span>
                                         {result.errors.length} error:
                                     </p>
                                     <ul>
@@ -105,7 +117,7 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                                             <li key={i}>{e.name}: {e.error}</li>
                                         ))}
                                         {result.errors.length > 5 && (
-                                            <li className="ats-import-more">... dan {result.errors.length - 5} lainnya</li>
+                                            <li className="ats-import-more">… dan {result.errors.length - 5} lainnya</li>
                                         )}
                                     </ul>
                                 </div>
@@ -113,7 +125,12 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                         </div>
                     )}
 
-                    {error && <div className="ats-import-err-banner">{error}</div>}
+                    {error && (
+                        <div className="ats-import-err-banner" role="alert">
+                            <span className="material-icons ats-stat-icon" aria-hidden="true">error</span>
+                            {error}
+                        </div>
+                    )}
                 </div>
 
                 <div className="ats-import-footer">
@@ -127,14 +144,16 @@ export default function AtsImportModal({ onClose, onRefresh }) {
                                 onClick={handleImport}
                                 disabled={!file || loading}
                             >
-                                {loading
-                                    ? 'Mengimport...'
-                                    : <><Upload size={14} style={{ marginRight: 6 }} />Import</>
-                                }
+                                {loading ? (
+                                    'Mengimport…'
+                                ) : (
+                                    <><span className="material-icons" aria-hidden="true">upload</span>Import</>
+                                )}
                             </button>
                         </>
                     )}
                 </div>
+
             </div>
         </div>
     )

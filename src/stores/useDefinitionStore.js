@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import useAuthStore from './useAuthStore'
 
-const API_URL = 'http://localhost:4000/api/definitions'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_URL = `${API_BASE_URL}/definitions`
 
 const getHeaders = () => {
     const token = useAuthStore.getState().token

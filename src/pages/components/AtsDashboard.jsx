@@ -20,18 +20,19 @@ function daysLeft(d) {
 }
 
 const GROUP_CFG = {
-    a:                   { label: 'Group A',            color: 'var(--color-green)',  bg: 'var(--color-green-10)' },
-    b:                   { label: 'Group B',            color: 'var(--color-amber)',  bg: 'var(--color-amber-10)' },
-    terpisah:            { label: 'Terpisah',           color: 'var(--text-muted)',   bg: 'var(--border-color)' },
-    'tidak diperpanjang':{ label: 'Tidak Diperpanjang', color: 'var(--color-red)',    bg: 'var(--color-red-10)' },
+    a:                    { label: 'Group A',            color: 'var(--color-green)',  bg: 'var(--color-green-10)' },
+    b:                    { label: 'Group B',            color: 'var(--color-amber)',  bg: 'var(--color-amber-10)' },
+    terpisah:             { label: 'Terpisah',           color: 'var(--text-muted)',   bg: 'var(--border-color)' },
+    'tidak diperpanjang': { label: 'Tidak Diperpanjang', color: 'var(--color-red)',    bg: 'var(--color-red-10)' },
 }
 
 export default function AtsDashboard({ resources }) {
     const s = useMemo(() => {
-        const now = Date.now()
-        const needed    = resources.filter((r) => r.needed).length
-        const expired   = resources.filter((r) => r.supportEnd && new Date(r.supportEnd) < now)
-        const soonList  = resources
+        const now    = Date.now()
+        const needed = resources.filter((r) => r.needed).length
+        const expired = resources.filter((r) => r.supportEnd && new Date(r.supportEnd) < now)
+
+        const soonList = resources
             .filter((r) => {
                 if (!r.supportEnd) return false
                 const diff = new Date(r.supportEnd) - now
@@ -51,8 +52,8 @@ export default function AtsDashboard({ resources }) {
                 costByYear[c.year] = (costByYear[c.year] || 0) + Number(c.amount)
             })
         })
-        const years   = Object.keys(costByYear).sort()
-        const maxCost = Math.max(...Object.values(costByYear), 1)
+        const years    = Object.keys(costByYear).sort()
+        const maxCost  = Math.max(...Object.values(costByYear), 1)
         const maxGroup = Math.max(...byGroup.map((g) => g.count), noGroup, 1)
 
         return { needed, notNeeded: resources.length - needed, expired: expired.length, soonList, byGroup, noGroup, costByYear, years, maxCost, maxGroup }
@@ -106,7 +107,7 @@ export default function AtsDashboard({ resources }) {
                                         <div
                                             className="ats-dash-bar"
                                             style={{
-                                                width: `${(s.costByYear[yr] / s.maxCost) * 100}%`,
+                                                transform: `scaleX(${s.costByYear[yr] / s.maxCost})`,
                                                 background: 'var(--color-primary)',
                                             }}
                                         />
@@ -133,7 +134,7 @@ export default function AtsDashboard({ resources }) {
                                     <div className="ats-dash-bar-wrap">
                                         <div
                                             className="ats-dash-bar"
-                                            style={{ width: `${(count / s.maxGroup) * 100}%`, background: cfg.color, opacity: 0.75 }}
+                                            style={{ transform: `scaleX(${count / s.maxGroup})`, background: cfg.color, opacity: 0.75 }}
                                         />
                                     </div>
                                     <span className="ats-dash-group-n">{count}</span>
@@ -143,32 +144,33 @@ export default function AtsDashboard({ resources }) {
                         {s.noGroup > 0 && (
                             <div className="ats-dash-group-row">
                                 <span className="ats-dash-group-badge" style={{ color: 'var(--text-dim)', background: 'var(--bg-hover)' }}>
-                                    Tanpa Group
+                                    Tanpa Grup
                                 </span>
                                 <div className="ats-dash-bar-wrap">
-                                    <div className="ats-dash-bar" style={{ width: `${(s.noGroup / s.maxGroup) * 100}%`, background: 'var(--text-dim)', opacity: 0.5 }} />
+                                    <div className="ats-dash-bar" style={{ transform: `scaleX(${s.noGroup / s.maxGroup})`, background: 'var(--text-dim)', opacity: 0.5 }} />
                                 </div>
                                 <span className="ats-dash-group-n">{s.noGroup}</span>
                             </div>
                         )}
                     </div>
                 </div>
+
             </div>
 
-            {/* ── Expiring soon table ── */}
+            {/* ── Expiring soon ── */}
             {s.soonList.length > 0 && (
                 <div className="ats-dash-card ats-dash-expiring">
-                    <div className="ats-dash-card__head" style={{ color: 'var(--color-amber)' }}>
-                        <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle', marginRight: '0.4rem' }}>schedule</span>
+                    <div className="ats-dash-card__head ats-dash-card__head--amber">
+                        <span className="material-icons ats-dash-head-icon" aria-hidden="true">schedule</span>
                         Kontrak Akan Berakhir dalam 60 Hari
                     </div>
                     <table className="ats-dash-exp-table">
                         <thead>
                             <tr>
-                                <th>Nama ATS</th>
-                                <th>Grup</th>
-                                <th>Tanggal Berakhir</th>
-                                <th>Sisa Hari</th>
+                                <th scope="col">Nama ATS</th>
+                                <th scope="col">Grup</th>
+                                <th scope="col">Tanggal Berakhir</th>
+                                <th scope="col">Sisa Hari</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -199,11 +201,11 @@ export default function AtsDashboard({ resources }) {
                 </div>
             )}
 
-            {/* ── All expired notice ── */}
+            {/* ── Expired notice ── */}
             {s.expired > 0 && (
                 <div className="ats-dash-card ats-dash-expired-banner">
-                    <div className="ats-dash-card__head" style={{ color: 'var(--color-red)' }}>
-                        <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle', marginRight: '0.4rem' }}>error_outline</span>
+                    <div className="ats-dash-card__head ats-dash-card__head--red">
+                        <span className="material-icons ats-dash-head-icon" aria-hidden="true">error_outline</span>
                         {s.expired} Kontrak Sudah Habis
                     </div>
                     <p className="ats-dash-empty" style={{ textAlign: 'left' }}>
@@ -211,6 +213,7 @@ export default function AtsDashboard({ resources }) {
                     </p>
                 </div>
             )}
+
         </div>
     )
 }

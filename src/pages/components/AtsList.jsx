@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Edit2, Trash2, DollarSign, Paperclip } from 'lucide-react'
+import { useState, useEffect } from 'react'
 import CostModal from './CostModal'
 import AssetLinkModal from './AssetLinkModal'
 import './AtsList.css'
@@ -30,8 +29,8 @@ const msDay = 86400000
 function expiryState(dateStr) {
     if (!dateStr) return null
     const diff = new Date(dateStr) - Date.now()
-    if (diff < 0) return 'expired'
-    if (diff < 30 * msDay) return 'soon'
+    if (diff < 0)              return 'expired'
+    if (diff < 30 * msDay)    return 'soon'
     return 'ok'
 }
 
@@ -40,8 +39,24 @@ function fmtDate(dateStr) {
 }
 
 export default function ResourceList({ items, assets, onEdit, onDelete, onRefresh }) {
-    const [costResource, setCostResource] = useState(null)
+    const [costResource, setCostResource]   = useState(null)
     const [assetResource, setAssetResource] = useState(null)
+    const [confirmingId, setConfirmingId]   = useState(null)
+
+    useEffect(() => {
+        if (!confirmingId) return
+        const timer = setTimeout(() => setConfirmingId(null), 3000)
+        return () => clearTimeout(timer)
+    }, [confirmingId])
+
+    const handleDeleteClick = (id) => {
+        if (confirmingId === id) {
+            onDelete(id)
+            setConfirmingId(null)
+        } else {
+            setConfirmingId(id)
+        }
+    }
 
     return (
         <>
@@ -49,14 +64,14 @@ export default function ResourceList({ items, assets, onEdit, onDelete, onRefres
                 <table className="ats-table">
                     <thead>
                         <tr>
-                            <th>Nama ATS</th>
-                            <th>Group</th>
-                            <th>Keterangan</th>
-                            <th>Periode ATS</th>
-                            <th>Butuh</th>
-                            <th>Biaya</th>
-                            <th>Aset</th>
-                            <th>Aksi</th>
+                            <th scope="col">Nama ATS</th>
+                            <th scope="col">Grup</th>
+                            <th scope="col">Keterangan</th>
+                            <th scope="col">Periode ATS</th>
+                            <th scope="col">Butuh</th>
+                            <th scope="col">Biaya</th>
+                            <th scope="col">Aset</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,8 +80,9 @@ export default function ResourceList({ items, assets, onEdit, onDelete, onRefres
                                 <td colSpan="8" className="ats-empty">Belum ada data ATS.</td>
                             </tr>
                         ) : items.map((item) => {
-                            const exp = expiryState(item.supportEnd)
+                            const exp   = expiryState(item.supportEnd)
                             const badge = item.atsGroup ? GROUP_BADGE[item.atsGroup] : null
+                            const isConfirming = confirmingId === item.id
 
                             return (
                                 <tr key={item.id}>
@@ -87,8 +103,6 @@ export default function ResourceList({ items, assets, onEdit, onDelete, onRefres
                                             {item.supportEnd && (
                                                 <span className={`ats-period-end ats-period--${exp}`}>
                                                     → {fmtDate(item.supportEnd)}
-                                                    {exp === 'expired' && ' ⚠'}
-                                                    {exp === 'soon' && ' ⏰'}
                                                 </span>
                                             )}
                                             {!item.supportStart && !item.supportEnd && (
@@ -103,7 +117,7 @@ export default function ResourceList({ items, assets, onEdit, onDelete, onRefres
                                     </td>
                                     <td>
                                         <div className="ats-cost-chips">
-                                            {item.costs?.length === 0 && <span className="ats-dim">—</span>}
+                                            {(!item.costs || item.costs.length === 0) && <span className="ats-dim">—</span>}
                                             {item.costs?.map((c) => (
                                                 <span key={c.id} className="ats-cost-chip">
                                                     {c.year}: {Number(c.amount).toLocaleString('id-ID')}
@@ -113,7 +127,7 @@ export default function ResourceList({ items, assets, onEdit, onDelete, onRefres
                                     </td>
                                     <td>
                                         <div className="ats-asset-chips">
-                                            {item.assets?.length === 0 && <span className="ats-dim">—</span>}
+                                            {(!item.assets || item.assets.length === 0) && <span className="ats-dim">—</span>}
                                             {item.assets?.slice(0, 2).map((a) => (
                                                 <span key={a.id} className="ats-chip">{a.name}</span>
                                             ))}
@@ -124,17 +138,39 @@ export default function ResourceList({ items, assets, onEdit, onDelete, onRefres
                                     </td>
                                     <td>
                                         <div className="ats-actions">
-                                            <button className="ats-action-btn" title="Edit" onClick={() => onEdit(item)}>
-                                                <Edit2 size={15} />
+                                            <button
+                                                className="ats-action-btn"
+                                                title="Edit"
+                                                aria-label="Edit"
+                                                onClick={() => onEdit(item)}
+                                            >
+                                                <span className="material-icons" aria-hidden="true">edit</span>
                                             </button>
-                                            <button className="ats-action-btn ats-action-btn--cost" title="Kelola Biaya" onClick={() => setCostResource(item)}>
-                                                <DollarSign size={15} />
+                                            <button
+                                                className="ats-action-btn ats-action-btn--cost"
+                                                title="Kelola Biaya"
+                                                aria-label="Kelola Biaya"
+                                                onClick={() => setCostResource(item)}
+                                            >
+                                                <span className="material-icons" aria-hidden="true">payments</span>
                                             </button>
-                                            <button className="ats-action-btn ats-action-btn--asset" title="Hubungkan Aset" onClick={() => setAssetResource(item)}>
-                                                <Paperclip size={15} />
+                                            <button
+                                                className="ats-action-btn ats-action-btn--asset"
+                                                title="Hubungkan Aset"
+                                                aria-label="Hubungkan Aset"
+                                                onClick={() => setAssetResource(item)}
+                                            >
+                                                <span className="material-icons" aria-hidden="true">link</span>
                                             </button>
-                                            <button className="ats-action-btn ats-action-btn--danger" title="Hapus" onClick={() => onDelete(item.id)}>
-                                                <Trash2 size={15} />
+                                            <button
+                                                className={`ats-action-btn${isConfirming ? ' ats-action-btn--confirm' : ' ats-action-btn--danger'}`}
+                                                title={isConfirming ? 'Klik lagi untuk konfirmasi' : 'Hapus'}
+                                                aria-label={isConfirming ? 'Konfirmasi hapus' : 'Hapus'}
+                                                onClick={() => handleDeleteClick(item.id)}
+                                            >
+                                                <span className="material-icons" aria-hidden="true">
+                                                    {isConfirming ? 'warning' : 'delete'}
+                                                </span>
                                             </button>
                                         </div>
                                     </td>
